@@ -39,89 +39,10 @@
                 <section class="config-step">
                     <h3><span class="step-dot">1</span> <span data-i18n="step_configure_items">Configure Your
                             Boxes</span></h3>
-                    <div class="sub-item-list">
-                        <!-- 80x80x12 - 40M -->
-                        <div class="sub-item-row" data-id="80x80" data-base-price="699">
-                            <div class="item-meta">
-                                <strong data-i18n="prod1_title">80 x 80 x 12 - 40M Standard POS</strong>
-                                <small>699 kr / box (30 Rolls)</small>
-                            </div>
-                            <div class="item-controls">
-                                <div class="quality-toggle" data-addon="20">
-                                    <button class="toggle-btn active" data-quality="standard"
-                                        data-i18n="standard_base">Standard</button>
-                                    <button class="toggle-btn" data-quality="bpa-free"
-                                        data-i18n="bpa_free_eco">Eco</button>
-                                </div>
-                                <div class="stepper">
-                                    <button class="step-btn minus text-2xl" style="line-height: 0;">-</button>
-                                    <input type="number" class="step-input" value="3" min="0" max="50">
-                                    <button class="step-btn plus text-2xl" style="line-height: 0;">+</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 80x45x12 - 16M -->
-                        <div class="sub-item-row" data-id="80x45" data-base-price="599">
-                            <div class="item-meta">
-                                <strong data-i18n="prod2_title">80 x 45 x 12 - 16M Standard POS</strong>
-                                <small>599 kr / box (30 Rolls)</small>
-                            </div>
-                            <div class="item-controls">
-                                <div class="quality-toggle" data-addon="20">
-                                    <button class="toggle-btn active" data-quality="standard"
-                                        data-i18n="standard_base">Standard</button>
-                                    <button class="toggle-btn" data-quality="bpa-free"
-                                        data-i18n="bpa_free_eco">Eco</button>
-                                </div>
-                                <div class="stepper">
-                                    <button class="step-btn minus">-</button>
-                                    <input type="number" class="step-input" value="0" min="0" max="50">
-                                    <button class="step-btn plus">+</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 57x58x12 - 40M -->
-                        <div class="sub-item-row" data-id="57x58" data-base-price="549">
-                            <div class="item-meta">
-                                <strong data-i18n="prod4_title">57 x 58 x 12 - 40M</strong>
-                                <small>549 kr / box (30 Rolls)</small>
-                            </div>
-                            <div class="item-controls">
-                                <div class="quality-toggle" data-addon="20">
-                                    <button class="toggle-btn active" data-quality="standard"
-                                        data-i18n="standard_base">Standard</button>
-                                    <button class="toggle-btn" data-quality="bpa-free"
-                                        data-i18n="bpa_free_eco">Eco</button>
-                                </div>
-                                <div class="stepper">
-                                    <button class="step-btn minus">-</button>
-                                    <input type="number" class="step-input" value="0" min="0" max="50">
-                                    <button class="step-btn plus">+</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 58x36x12 - 14M -->
-                        <div class="sub-item-row" data-id="58x36" data-base-price="349">
-                            <div class="item-meta">
-                                <strong data-i18n="prod5_title">58 x 36 x 12 - 14M Terminal</strong>
-                                <small>349 kr / box (30 Rolls)</small>
-                            </div>
-                            <div class="item-controls">
-                                <div class="quality-toggle" data-addon="20">
-                                    <button class="toggle-btn active" data-quality="standard"
-                                        data-i18n="standard_base">Standard</button>
-                                    <button class="toggle-btn" data-quality="bpa-free"
-                                        data-i18n="bpa_free_eco">Eco</button>
-                                </div>
-                                <div class="stepper">
-                                    <button class="step-btn minus">-</button>
-                                    <input type="number" class="step-input" value="0" min="0" max="50">
-                                    <button class="step-btn plus">+</button>
-                                </div>
-                            </div>
+                    <div id="subscription-items-container" class="sub-item-list">
+                        <div class="loading-container">
+                            <div class="loading-spinner"></div>
+                            <p data-i18n="loading_products">Loading our latest inventory...</p>
                         </div>
                     </div>
                 </section>

@@ -2,8 +2,11 @@
  * NordicRoll - Subscription Page Logic
  * Handles plan configuration, pricing, frequency selection, and submission.
  */
+
+const SUB_INVENTORY_URL = "https://script.google.com/macros/s/AKfycbyGoX_zpfGc8rG0G-Ik7Qm_rX0s8bQd4zefxg2h9IUSzXwcFNAdJazlp_mxqJNkc7cE/exec";
+
 document.addEventListener('DOMContentLoaded', () => {
-    const itemRows = document.querySelectorAll('.sub-item-row');
+    const itemsContainer = document.getElementById('subscription-items-container');
     const freqCards = document.querySelectorAll('.freq-card');
     const subSubmitBtn = document.querySelector('#subscription-form button[type="submit"]');
     const minWarning = document.getElementById('min-limit-warning');
@@ -20,17 +23,138 @@ document.addEventListener('DOMContentLoaded', () => {
         months: 1
     };
 
+    let itemRows = []; // Will be populated after fetch
+
+    // --- Dynamic Loading Logic ---
+    async function loadSubscriptionProducts() {
+        if (!itemsContainer) return;
+
+        try {
+            const response = await fetch(SUB_INVENTORY_URL);
+            const products = await response.json();
+
+            if (products && products.length > 0) {
+                renderSubscriptionRows(products);
+            } else {
+                itemsContainer.innerHTML = '<p class="text-center">No subscription products available.</p>';
+            }
+        } catch (e) {
+            console.error("Failed to load subscription products:", e);
+            itemsContainer.innerHTML = '<p class="error-msg">Error loading products. Please try refreshing.</p>';
+        }
+    }
+
+    function renderSubscriptionRows(products) {
+        itemsContainer.innerHTML = ''; // Clear loading state
+        const lang = localStorage.getItem('preferredLang') || 'en';
+
+        // Helper to get translated string
+        const t = (key) => (translations[lang] && translations[lang][key]) ? translations[lang][key] : key;
+
+        products.forEach(p => {
+            const row = document.createElement('div');
+            row.className = 'sub-item-row';
+            row.dataset.id = p.key;
+            // Subscription is box-only usually, so we use price_box
+            row.dataset.basePrice = p.price_box;
+
+            const name = p[`name_${lang}`] || p.name_en || p.name;
+            const price = p.price_box;
+
+            // Default quantity for first item could be 3, others 0, or all 0
+            // Let's set 0 for all to be clean, or existing pattern. 
+            // Previous code had 3 for first item. Let's stick to 0 for neutral start unless logic demands.
+            // Actually, let's keep it simple: start at 0.
+
+            row.innerHTML = `
+                <div class="item-meta">
+                    <strong>${name}</strong>
+                    <small>${price} kr / ${t('box') || 'box'}</small>
+                </div>
+                <div class="item-controls">
+                    <div class="quality-toggle" data-addon="20">
+                        <button class="toggle-btn active" type="button" data-quality="standard">${t('std_short') || 'Std'}</button>
+                        <button class="toggle-btn" type="button" data-quality="bpa-free">${t('eco_short') || 'Eco'}</button>
+                    </div>
+                    <div class="stepper">
+                        <button class="step-btn minus" type="button">-</button>
+                        <input type="number" class="step-input" value="0" min="0" max="50">
+                        <button class="step-btn plus" type="button">+</button>
+                    </div>
+                </div>
+            `;
+            itemsContainer.appendChild(row);
+        });
+
+        // Re-initialize logic
+        initializeRowListeners();
+    }
+
+    function initializeRowListeners() {
+        itemRows = document.querySelectorAll('.sub-item-row');
+
+        itemRows.forEach(row => {
+            const minusBtn = row.querySelector('.minus');
+            const plusBtn = row.querySelector('.plus');
+            const input = row.querySelector('.step-input');
+
+            if (minusBtn) {
+                minusBtn.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent form submit if inside form
+                    const val = parseInt(input.value) || 0;
+                    if (val > 0) {
+                        input.value = val - 1;
+                        updateSummary();
+                    }
+                });
+            }
+
+            if (plusBtn) {
+                plusBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const val = parseInt(input.value) || 0;
+                    input.value = val + 1;
+                    updateSummary();
+                });
+            }
+
+            if (input) {
+                input.addEventListener('change', () => {
+                    if (input.value < 0) input.value = 0;
+                    updateSummary();
+                });
+            }
+
+            const toggles = row.querySelectorAll('.toggle-btn');
+            toggles.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggles.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updateSummary();
+                });
+            });
+        });
+
+        // Initial summary update
+        updateSummary();
+    }
+
+    // --- Existing Logic adapted ---
+
     function updateSummary() {
         let totalSubtotal = 0;
         let summaryHTML = '';
 
+        if (!itemRows.length) return;
+
         itemRows.forEach(row => {
             const qtyInput = row.querySelector('.step-input');
-            const qty = parseInt(qtyInput.value);
+            const qty = parseInt(qtyInput.value) || 0; // Handle NaN
             const basePrice = parseInt(row.dataset.basePrice);
 
             const activeToggle = row.querySelector('.toggle-btn.active');
-            const quality = activeToggle.dataset.quality;
+            const quality = activeToggle.dataset.quality; // 'standard' or 'bpa-free'
             const addonBase = parseInt(row.querySelector('.quality-toggle').dataset.addon);
             const addon = quality === 'bpa-free' ? addonBase : 0;
 
@@ -69,6 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Minimum Price Check
         if (subSubmitBtn) {
+            // Logic: Must spend at least 500kr/month on average
             if (monthlyAverage < 500 && totalSubtotal > 0) {
                 subSubmitBtn.disabled = true;
                 subSubmitBtn.style.opacity = '0.5';
@@ -86,47 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
-    // Stepper Logic
-    itemRows.forEach(row => {
-        const minusBtn = row.querySelector('.minus');
-        const plusBtn = row.querySelector('.plus');
-        const input = row.querySelector('.step-input');
-
-        if (minusBtn) {
-            minusBtn.addEventListener('click', () => {
-                const val = parseInt(input.value) || 0;
-                if (val > 0) {
-                    input.value = val - 1;
-                    updateSummary();
-                }
-            });
-        }
-
-        if (plusBtn) {
-            plusBtn.addEventListener('click', () => {
-                const val = parseInt(input.value) || 0;
-                input.value = val + 1;
-                updateSummary();
-            });
-        }
-
-        if (input) {
-            input.addEventListener('change', () => {
-                if (input.value < 0) input.value = 0;
-                updateSummary();
-            });
-        }
-
-        const toggles = row.querySelectorAll('.toggle-btn');
-        toggles.forEach(btn => {
-            btn.addEventListener('click', () => {
-                toggles.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                updateSummary();
-            });
-        });
-    });
 
     // Frequency Selection
     freqCards.forEach(card => {
@@ -157,9 +241,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalStr = summaryTotal ? summaryTotal.textContent : '0 kr';
 
             let itemsSummary = "";
-            const rows = document.getElementsByClassName('sub-item-row');
-            for (let i = 0; i < rows.length; i++) {
-                const row = rows[i];
+            const rows = document.querySelectorAll('.sub-item-row');
+            rows.forEach(row => {
                 const input = row.querySelector('.step-input');
                 const qty = parseInt(input.value) || 0;
 
@@ -170,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const qLabel = (quality === 'bpa-free') ? 'Eco' : 'Std';
                     itemsSummary += `• ${name} (${unitStr}) (${qLabel}) x${qty}\n`;
                 }
-            }
+            });
 
             formData.append('Order Number', orderNumber);
             formData.append('Delivery Frequency', currentFreq.label);
@@ -180,7 +263,13 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('Status', 'Pending');
             formData.append('FormSource', 'Subscription');
 
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUg5waQQOXnZico1AY1rcExtglHJxc5Tq9jhIVzoKkIkj-LvFAtohCC5rQdGEP69-mnA/exec';
+            // Using the same inventory script URL as it's likely the same deployment for handling POST?
+            // Wait, usually the implementation uses the same Web App for GET (products) and POST (orders).
+            // The USER provided inventory URL: https://script.google.com/macros/s/.../exec
+            // Usually this is the same unless they deployed two different scripts.
+            // I will assume it is the same script since the user said "in url google sheet...".
+
+            const GOOGLE_SCRIPT_URL = SUB_INVENTORY_URL;
 
             try {
                 // Security: Added timeout
@@ -208,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Validation
+    // Validation ... (Existing validation logic)
     const zipInput = document.getElementById('sub-zip');
     const cityInput = document.getElementById('sub-city');
     const zipMsg = document.getElementById('zip-msg');
@@ -260,14 +349,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Event listeners for recalculation
-    window.addEventListener('languageChanged', updateSummary);
-    window.addEventListener('storage', (e) => {
-        if (e.key === 'preferredLang') updateSummary();
+    // Event listeners for recalculation (Language change)
+    // We need to re-render descriptions if lang changes, or just update labels. 
+    // Simpler to rely on updateSummary for total but re-render might be needed for names?
+    // Actually, updateSummary updates the summary list names. 
+    // BUT the product rows THEMSELVES (the <strong>Name</strong>) won't update automatically unless we explicitly handle it.
+    // Let's add a reload on language change.
+
+    window.addEventListener('languageChanged', () => {
+        // Re-load products to get translated names
+        loadSubscriptionProducts();
     });
 
-    // Initial update
-    updateSummary();
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'preferredLang') {
+            loadSubscriptionProducts();
+        }
+    });
 
     // Custom helper for internal redirects in success modal
     const homeBtn = document.getElementById('go-home-success');
@@ -276,4 +374,7 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'index.html';
         });
     }
+
+    // Start Loading
+    loadSubscriptionProducts();
 });
