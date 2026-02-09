@@ -1,35 +1,59 @@
-const INVENTORY_URL = "https://script.google.com/macros/s/AKfycbyGoX_zpfGc8rG0G-Ik7Qm_rX0s8bQd4zefxg2h9IUSzXwcFNAdJazlp_mxqJNkc7cE/exec"; // لینک Web App گوگل را اینجا قرار دهید
+const INVENTORY_URL = "https://script.google.com/macros/s/AKfycbyGoX_zpfGc8rG0G-Ik7Qm_rX0s8bQd4zefxg2h9IUSzXwcFNAdJazlp_mxqJNkc7cE/exec";
+const CACHE_KEY = 'nordic_inventory_cache';
+const POLL_INTERVAL = 60000; // Check for updates every 60 seconds
 
 let fetchedProducts = [];
 
-async function loadInventory() {
+async function loadInventory(isPolling = false) {
     const grid = document.getElementById('dynamic-product-grid');
     if (!grid) return;
 
     if (!INVENTORY_URL) {
-        console.warn("Inventory URL is empty. Add your Google Apps Script URL to js/inventory.js");
+        console.warn("Inventory URL is empty.");
         return;
     }
 
+    // 1. Instant Load from Cache (only on initial load)
+    if (!isPolling) {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        if (cachedData) {
+            try {
+                fetchedProducts = JSON.parse(cachedData);
+                if (fetchedProducts.length > 0) {
+                    renderProducts();
+                    console.log("Loaded from cache.");
+                }
+            } catch (e) {
+                console.error("Cache parse error", e);
+            }
+        }
+    }
+
+    // 2. Fetch fresh data
     try {
         const response = await fetch(INVENTORY_URL);
-        fetchedProducts = await response.json();
+        const liveData = await response.json();
 
-        if (fetchedProducts && fetchedProducts.length > 0) {
-            renderProducts();
+        // 3. Compare and Update if different
+        if (JSON.stringify(liveData) !== JSON.stringify(fetchedProducts)) {
+            fetchedProducts = liveData;
+            localStorage.setItem(CACHE_KEY, JSON.stringify(liveData));
 
-            // Apply initial translations to static elements (like "Box", "Roll")
-            const currentLang = localStorage.getItem('preferredLang') || 'en';
-            if (typeof window.applyTranslations === 'function') {
-                window.applyTranslations(currentLang);
+            if (fetchedProducts && fetchedProducts.length > 0) {
+                renderProducts();
+                console.log("Inventory updated from live source.");
+            } else {
+                console.warn("Inventory loaded but came back empty.");
+                if (!isPolling) {
+                    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 3rem; opacity: 0.7;">No products available at the moment.</p>`;
+                }
             }
-        } else {
-            console.warn("Inventory loaded but came back empty.");
-            grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; padding: 3rem; opacity: 0.7;">No products available at the moment.</p>`;
         }
     } catch (e) {
         console.error("Failed to load inventory:", e);
-        grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #ef4444;">Error loading products. Please try again later.</p>`;
+        if (!isPolling && fetchedProducts.length === 0) {
+            grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: #ef4444;">Error loading products. Please try again later.</p>`;
+        }
     }
 }
 
@@ -93,7 +117,44 @@ function createProductCard(p) {
             <button class="btn btn-secondary" data-i18n="add_to_cart">Add to Cart</button>
         </div>
     `;
+
+    // Wire up unit selector logic immediately for this card
+    const units = div.querySelectorAll('.unit-option');
+    const priceDisplay = div.querySelector('.price span');
+
+    units.forEach(u => {
+        u.addEventListener('click', () => {
+            units.forEach(btn => btn.classList.remove('active'));
+            u.classList.add('active');
+
+            const unit = u.dataset.unit;
+            if (unit === 'box') {
+                priceDisplay.textContent = p.price_box;
+            } else {
+                priceDisplay.textContent = p.price_roll;
+            }
+        });
+    });
+
+    // Wire up quantity
+    const minus = div.querySelector('.minus');
+    const plus = div.querySelector('.plus');
+    const input = div.querySelector('.qty-input');
+
+    minus.addEventListener('click', () => {
+        let val = parseInt(input.value) || 1;
+        if (val > 1) input.value = val - 1;
+    });
+
+    plus.addEventListener('click', () => {
+        let val = parseInt(input.value) || 1;
+        input.value = val + 1;
+    });
+
     return div;
 }
 
-document.addEventListener('DOMContentLoaded', loadInventory);
+document.addEventListener('DOMContentLoaded', () => {
+    loadInventory(); // Initial load
+    setInterval(() => loadInventory(true), POLL_INTERVAL); // Start polling
+});

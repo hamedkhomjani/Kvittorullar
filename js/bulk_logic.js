@@ -3,8 +3,9 @@
  * Handles calculations, tiered pricing, and PDF generation.
  */
 
-// Using the same Google Script Web App URL for inventory
 const BULK_INVENTORY_URL = "https://script.google.com/macros/s/AKfycbyGoX_zpfGc8rG0G-Ik7Qm_rX0s8bQd4zefxg2h9IUSzXwcFNAdJazlp_mxqJNkc7cE/exec";
+const CACHE_KEY = 'nordic_inventory_cache';
+const POLL_INTERVAL = 60000;
 
 document.addEventListener('DOMContentLoaded', () => {
     const itemsContainer = document.getElementById('bulk-items-container');
@@ -14,29 +15,66 @@ document.addEventListener('DOMContentLoaded', () => {
     const minWarning = document.getElementById('min-warning');
     const downloadBtn = document.getElementById('download-pdf-btn');
 
-    let itemRows = [];
+    let fetchedProducts = [];
 
     // --- Dynamic Loading Logic ---
-    async function loadBulkProducts() {
+    async function loadBulkProducts(isPolling = false) {
         if (!itemsContainer) return;
+
+        // 1. Instant Load from Cache
+        if (!isPolling) {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (cached) {
+                try {
+                    fetchedProducts = JSON.parse(cached);
+                    if (fetchedProducts.length > 0) {
+                        // Maintain existing input values if re-rendering? 
+                        // Actually if we re-render entirely we lose input state.
+                        // Better check if we really need to re-render.
+                        renderBulkRows(fetchedProducts);
+                        console.log("Bulk loaded from cache.");
+                    }
+                } catch (e) { console.error(e); }
+            }
+        }
 
         try {
             const response = await fetch(BULK_INVENTORY_URL);
-            const products = await response.json();
+            const liveData = await response.json();
 
-            if (products && products.length > 0) {
-                renderBulkRows(products);
-            } else {
-                itemsContainer.innerHTML = '<p class="text-center">No bulk products available.</p>';
+            // 2. Compare. If different, we update.
+            // CAUTION: Re-rendering wipes out user inputs (quantities).
+            // We should only re-render if data CHANGED physically (prices/names).
+            // And if user has inputs, maybe warn? or try to preserve them.
+            // For simplicity, we just check deep equality of source data.
+
+            // Check if fetchedProducts is empty (first load) OR different
+            if (JSON.stringify(liveData) !== JSON.stringify(fetchedProducts)) {
+
+                // Preserve current quantities if possible
+                const currentQuantities = {};
+                document.querySelectorAll('.bulk-item-row').forEach(row => {
+                    const id = row.dataset.id; // We need an ID
+                    const val = row.querySelector('.bulk-qty-input').value;
+                    if (id) currentQuantities[id] = val;
+                });
+
+                fetchedProducts = liveData;
+                localStorage.setItem(CACHE_KEY, JSON.stringify(liveData));
+                renderBulkRows(fetchedProducts, currentQuantities);
+
+                console.log("Bulk inventory updated from live source.");
             }
         } catch (e) {
             console.error("Failed to load bulk products:", e);
-            itemsContainer.innerHTML = '<p class="error-msg">Error loading products. Please try refreshing.</p>';
+            if (!isPolling && itemsContainer.innerHTML.includes('loading-spinner')) {
+                itemsContainer.innerHTML = '<p class="error-msg">Error loading products. Please try refreshing.</p>';
+            }
         }
     }
 
-    function renderBulkRows(products) {
-        itemsContainer.innerHTML = ''; // Clear loading state
+    function renderBulkRows(products, preservedQuantities = {}) {
+        itemsContainer.innerHTML = '';
         const lang = localStorage.getItem('preferredLang') || 'en';
 
         // Helper to get translated string
@@ -45,9 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
         products.forEach((p, index) => {
             const row = document.createElement('div');
             row.className = 'bulk-item-row';
-            row.dataset.price = p.price_box; // Bulk usually uses box price
+            row.dataset.id = p.key || index; // Use key from sheet or index
+            row.dataset.price = p.price_box;
 
-            // Set styles to match original design
+            // Styles
             row.style.display = 'flex';
             row.style.alignItems = 'center';
             row.style.justifyContent = 'space-between';
@@ -59,9 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const info = p[`info_${lang}`] || p.info_en || '';
             const price = p.price_box;
 
-            // Default qty: 20 for first item (as per original design), 0 for others
-            // This encourages the user to reach the minimum order
-            const initialQty = index === 0 ? 20 : 0;
+            // initialQty: if preserved exists, use it. Else if first load (no preserved), default 0 (as requested).
+            let val = 0;
+            if (preservedQuantities[row.dataset.id]) {
+                val = preservedQuantities[row.dataset.id];
+            }
+            // Note: User requested initial load to be 0 for all.
 
             row.innerHTML = `
                 <div>
@@ -78,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 <div class="stepper">
                     <button class="bulk-qty-btn minus" type="button">-</button>
-                    <input type="number" class="bulk-qty-input" value="${initialQty}" min="0">
+                    <input type="number" class="bulk-qty-input" value="${val}" min="0">
                     <button class="bulk-qty-btn plus" type="button">+</button>
                 </div>
             `;
@@ -87,11 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Re-initialize logic
         initializeBulkListeners();
-        calculate(); // Initial calculation
+        calculate();
     }
 
     function initializeBulkListeners() {
-        itemRows = document.querySelectorAll('.bulk-item-row');
+        const itemRows = document.querySelectorAll('.bulk-item-row'); // Scope search
 
         itemRows.forEach(row => {
             const minus = row.querySelector('.minus');
@@ -128,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let totalQty = 0;
         let totalBasePrice = 0;
 
-        // Re-query rows in case they weren't loaded yet (though this fn is called after render)
         const rows = document.querySelectorAll('.bulk-item-row');
         rows.forEach(row => {
             const price = parseInt(row.dataset.price);
@@ -191,21 +232,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event listeners for recalculation (Language change)
-    window.addEventListener('languageChanged', () => {
-        loadBulkProducts(); // Re-fetch/render to update names
-    });
+    // Event listeners
+    window.addEventListener('languageChanged', () => loadBulkProducts(false)); // Re-render immediatley on lang change (from cache mostly)
 
-    window.addEventListener('storage', (e) => {
-        if (e.key === 'preferredLang') {
-            loadBulkProducts();
-        }
-    });
-
-    // Start loading
+    // Start Logic
     loadBulkProducts();
+    setInterval(() => loadBulkProducts(true), POLL_INTERVAL);
 
-    // --- PDF Generation Logic ---
+    // --- PDF Logic ---
     if (downloadBtn) {
         downloadBtn.addEventListener('click', () => {
             if (!window.jspdf) {
@@ -235,7 +269,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalQty = totalQtyDisplay ? totalQtyDisplay.textContent : '0';
             const totalPrice = totalPriceDisplay ? totalPriceDisplay.textContent : '0 kr';
 
-            // PDF Design
             doc.setFontSize(22);
             doc.setTextColor(59, 130, 246);
             doc.text(texts.title, 20, 20);
@@ -264,11 +297,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const qtyInput = row.querySelector('.bulk-qty-input');
                 const qty = parseInt(qtyInput.value) || 0;
                 if (qty > 0) {
-                    // Try to get name from the strong tag span first, else fallback
                     let nameElem = row.querySelector('strong span');
                     let name = nameElem ? nameElem.textContent : 'Product';
-
-                    // Truncate if too long to prevent overlap
                     name = name.length > 40 ? name.substring(0, 37) + '...' : name;
 
                     const basePrice = parseInt(row.dataset.price);
@@ -292,7 +322,6 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.setFontSize(14);
             doc.text(`${texts.estPriceLabel} ${totalPrice}`, 180, y, { align: "right" });
 
-            // Footer
             doc.setFontSize(10);
             doc.setTextColor(150);
             doc.text(texts.footer1, 20, 280);
