@@ -2,18 +2,133 @@
  * NordicRoll - Bulk Order Builder Logic
  * Handles calculations, tiered pricing, and PDF generation.
  */
+
+// Using the same Google Script Web App URL for inventory
+const BULK_INVENTORY_URL = "https://script.google.com/macros/s/AKfycbyGoX_zpfGc8rG0G-Ik7Qm_rX0s8bQd4zefxg2h9IUSzXwcFNAdJazlp_mxqJNkc7cE/exec";
+
 document.addEventListener('DOMContentLoaded', () => {
-    const itemRows = document.querySelectorAll('.bulk-item-row');
+    const itemsContainer = document.getElementById('bulk-items-container');
     const totalQtyDisplay = document.getElementById('total-qty');
     const totalPriceDisplay = document.getElementById('total-price');
     const savingsBadge = document.getElementById('savings-badge');
     const minWarning = document.getElementById('min-warning');
     const downloadBtn = document.getElementById('download-pdf-btn');
 
+    let itemRows = [];
+
+    // --- Dynamic Loading Logic ---
+    async function loadBulkProducts() {
+        if (!itemsContainer) return;
+
+        try {
+            const response = await fetch(BULK_INVENTORY_URL);
+            const products = await response.json();
+
+            if (products && products.length > 0) {
+                renderBulkRows(products);
+            } else {
+                itemsContainer.innerHTML = '<p class="text-center">No bulk products available.</p>';
+            }
+        } catch (e) {
+            console.error("Failed to load bulk products:", e);
+            itemsContainer.innerHTML = '<p class="error-msg">Error loading products. Please try refreshing.</p>';
+        }
+    }
+
+    function renderBulkRows(products) {
+        itemsContainer.innerHTML = ''; // Clear loading state
+        const lang = localStorage.getItem('preferredLang') || 'en';
+
+        // Helper to get translated string
+        const t = (key) => (translations[lang] && translations[lang][key]) ? translations[lang][key] : key;
+
+        products.forEach((p, index) => {
+            const row = document.createElement('div');
+            row.className = 'bulk-item-row';
+            row.dataset.price = p.price_box; // Bulk usually uses box price
+
+            // Set styles to match original design
+            row.style.display = 'flex';
+            row.style.alignItems = 'center';
+            row.style.justifyContent = 'space-between';
+            row.style.padding = '1.5rem';
+            row.style.background = 'var(--bg-alt)';
+            row.style.borderRadius = '1.5rem';
+
+            const name = p[`name_${lang}`] || p.name_en || p.name;
+            const info = p[`info_${lang}`] || p.info_en || '';
+            const price = p.price_box;
+
+            // Default qty: 20 for first item (as per original design), 0 for others
+            // This encourages the user to reach the minimum order
+            const initialQty = index === 0 ? 20 : 0;
+
+            row.innerHTML = `
+                <div>
+                    <strong style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span>${name}</span>
+                        ${info ? `
+                        <span class="info-trigger">ⓘ
+                            <span class="tooltip-box">${info}</span>
+                        </span>` : ''}
+                    </strong>
+                    <small style="color: var(--text-light);">
+                        <span>${t('base_price') || 'Base Price'}</span>: ${price} kr
+                    </small>
+                </div>
+                <div class="stepper">
+                    <button class="bulk-qty-btn minus" type="button">-</button>
+                    <input type="number" class="bulk-qty-input" value="${initialQty}" min="0">
+                    <button class="bulk-qty-btn plus" type="button">+</button>
+                </div>
+            `;
+            itemsContainer.appendChild(row);
+        });
+
+        // Re-initialize logic
+        initializeBulkListeners();
+        calculate(); // Initial calculation
+    }
+
+    function initializeBulkListeners() {
+        itemRows = document.querySelectorAll('.bulk-item-row');
+
+        itemRows.forEach(row => {
+            const minus = row.querySelector('.minus');
+            const plus = row.querySelector('.plus');
+            const input = row.querySelector('.bulk-qty-input');
+
+            if (minus) {
+                minus.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const val = parseInt(input.value) || 0;
+                    if (val > 0) {
+                        input.value = val - 1;
+                        calculate();
+                    }
+                });
+            }
+
+            if (plus) {
+                plus.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const val = parseInt(input.value) || 0;
+                    input.value = val + 1;
+                    calculate();
+                });
+            }
+
+            if (input) {
+                input.addEventListener('input', calculate);
+            }
+        });
+    }
+
     function calculate() {
         let totalQty = 0;
         let totalBasePrice = 0;
 
+        // Re-query rows in case they weren't loaded yet (though this fn is called after render)
         const rows = document.querySelectorAll('.bulk-item-row');
         rows.forEach(row => {
             const price = parseInt(row.dataset.price);
@@ -76,43 +191,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Event listeners for recalculation
-    window.addEventListener('languageChanged', calculate);
+    // Event listeners for recalculation (Language change)
+    window.addEventListener('languageChanged', () => {
+        loadBulkProducts(); // Re-fetch/render to update names
+    });
+
     window.addEventListener('storage', (e) => {
-        if (e.key === 'preferredLang') calculate();
-    });
-
-    // Stepper logic
-    itemRows.forEach(row => {
-        const minus = row.querySelector('.minus');
-        const plus = row.querySelector('.plus');
-        const input = row.querySelector('.bulk-qty-input');
-
-        if (minus) {
-            minus.addEventListener('click', () => {
-                const val = parseInt(input.value) || 0;
-                if (val > 0) {
-                    input.value = val - 1;
-                    calculate();
-                }
-            });
-        }
-
-        if (plus) {
-            plus.addEventListener('click', () => {
-                const val = parseInt(input.value) || 0;
-                input.value = val + 1;
-                calculate();
-            });
-        }
-
-        if (input) {
-            input.addEventListener('input', calculate);
+        if (e.key === 'preferredLang') {
+            loadBulkProducts();
         }
     });
 
-    // Initial calculation
-    calculate();
+    // Start loading
+    loadBulkProducts();
 
     // --- PDF Generation Logic ---
     if (downloadBtn) {
@@ -125,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const doc = new jsPDF();
 
             const currentLang = localStorage.getItem('preferredLang') || 'en';
-            const isEnglish = currentLang === 'en';
             const langData = translations[currentLang] || translations['en'];
 
             const texts = {
@@ -148,8 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // PDF Design
             doc.setFontSize(22);
             doc.setTextColor(59, 130, 246);
-            // Note: jsPDF standard fonts do not support non-Latin characters (like Persian).
-            // We use English fallback for the title if current charset isn't supported, but we'll try localized labels.
             doc.text(texts.title, 20, 20);
 
             doc.setFontSize(10);
@@ -170,20 +258,17 @@ document.addEventListener('DOMContentLoaded', () => {
             y += 10;
 
             doc.setFont("helvetica", "normal");
-            itemRows.forEach(row => {
+
+            const rows = document.querySelectorAll('.bulk-item-row');
+            rows.forEach(row => {
                 const qtyInput = row.querySelector('.bulk-qty-input');
                 const qty = parseInt(qtyInput.value) || 0;
                 if (qty > 0) {
-                    const nameKey = row.querySelector('strong span').getAttribute('data-i18n');
-                    let name = row.querySelector('strong span').textContent;
+                    // Try to get name from the strong tag span first, else fallback
+                    let nameElem = row.querySelector('strong span');
+                    let name = nameElem ? nameElem.textContent : 'Product';
 
-                    // Try to get translated name
-                    if (langData && nameKey && langData[nameKey]) {
-                        name = langData[nameKey];
-                    }
-
-                    // Fallback: If name contains non-Latin and current font is helvetica, 
-                    // jsPDF might fail. We use the textContent which is already in the DOM.
+                    // Truncate if too long to prevent overlap
                     name = name.length > 40 ? name.substring(0, 37) + '...' : name;
 
                     const basePrice = parseInt(row.dataset.price);
@@ -201,34 +286,19 @@ document.addEventListener('DOMContentLoaded', () => {
             y += 10;
 
             doc.setFont("helvetica", "bold");
-            doc.setFontSize(14);
-            doc.text(texts.totalQtyLabel, 120, y, { align: "right" });
-            doc.text(totalQty, 180, y, { align: "right" });
-            y += 10;
-            doc.setFontSize(16);
+            doc.text(`${texts.totalQtyLabel} ${totalQty}`, 180, y, { align: "right" });
+            y += 7;
             doc.setTextColor(59, 130, 246);
-            doc.text(texts.estPriceLabel, 120, y, { align: "right" });
-            doc.text(totalPrice, 180, y, { align: "right" });
+            doc.setFontSize(14);
+            doc.text(`${texts.estPriceLabel} ${totalPrice}`, 180, y, { align: "right" });
 
-            y += 30;
+            // Footer
             doc.setFontSize(10);
             doc.setTextColor(150);
-            doc.setFont("helvetica", "italic");
-            doc.text(texts.footer1, 20, y);
-            doc.text(texts.footer2, 20, y + 5);
+            doc.text(texts.footer1, 20, 280);
+            doc.text(texts.footer2, 20, 285);
 
-            doc.save(currentLang === 'en' ? "nordicroll-quote.pdf" : `nordicroll-offert-${currentLang}.pdf`);
-        });
-    }
-
-    // Additional UI helpers
-    const processBtn = document.getElementById('view-process-btn');
-    if (processBtn) {
-        processBtn.addEventListener('click', () => {
-            const processSection = document.querySelector('.process-section');
-            if (processSection) {
-                processSection.scrollIntoView({ behavior: 'smooth' });
-            }
+            doc.save("NordicRoll_Quote.pdf");
         });
     }
 });

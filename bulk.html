@@ -73,86 +73,11 @@
                 <div class="calc-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem;">
                     <!-- Controls -->
                     <div class="calc-controls">
-                        <div class="bulk-item-list" style="display: flex; flex-direction: column; gap: 1.5rem;">
-                            <!-- Item 1 -->
-                            <div class="bulk-item-row" data-price="699"
-                                style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: var(--bg-alt); border-radius: 1.5rem;">
-                                <div>
-                                    <strong style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <span data-i18n="prod1_title">80 x 80 x 12 - 40M Standard POS</span>
-                                        <span class="info-trigger">ⓘ
-                                            <span class="tooltip-box" data-i18n="prod1_info">Ideal for restaurant
-                                                printers, Star Micronics, and Epson T88 series.</span>
-                                        </span>
-                                    </strong>
-                                    <small style="color: var(--text-light);"><span data-i18n="base_price">699 kr / box
-                                            base</span>: 699 kr</small>
-                                </div>
-                                <div class="stepper">
-                                    <button class="bulk-qty-btn minus">-</button>
-                                    <input type="number" class="bulk-qty-input" value="20" min="0">
-                                    <button class="bulk-qty-btn plus">+</button>
-                                </div>
-                            </div>
-                            <!-- Item 2 -->
-                            <div class="bulk-item-row" data-price="599"
-                                style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: var(--bg-alt); border-radius: 1.5rem;">
-                                <div>
-                                    <strong style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <span data-i18n="prod2_title">80 x 45 x 12 - 16M Standard POS</span>
-                                        <span class="info-trigger">ⓘ
-                                            <span class="tooltip-box" data-i18n="prod2_info">Compact version for smaller
-                                                POS docks and kitchen printers.</span>
-                                        </span>
-                                    </strong>
-                                    <small style="color: var(--text-light);"><span data-i18n="base_price">Base
-                                            Price</span>: 599 kr</small>
-                                </div>
-                                <div class="stepper">
-                                    <button class="bulk-qty-btn minus">-</button>
-                                    <input type="number" class="bulk-qty-input" value="0" min="0">
-                                    <button class="bulk-qty-btn plus">+</button>
-                                </div>
-                            </div>
-                            <!-- Item 3 -->
-                            <div class="bulk-item-row" data-price="549"
-                                style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: var(--bg-alt); border-radius: 1.5rem;">
-                                <div>
-                                    <strong style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <span data-i18n="prod4_title">57 x 58 x 12 - 40M</span>
-                                        <span class="info-trigger">ⓘ
-                                            <span class="tooltip-box" data-i18n="prod4_info">Standard size for desktop
-                                                card terminals and bank POS systems.</span>
-                                        </span>
-                                    </strong>
-                                    <small style="color: var(--text-light);"><span data-i18n="base_price">Base
-                                            Price</span>: 549 kr</small>
-                                </div>
-                                <div class="stepper">
-                                    <button class="bulk-qty-btn minus">-</button>
-                                    <input type="number" class="bulk-qty-input" value="0" min="0">
-                                    <button class="bulk-qty-btn plus">+</button>
-                                </div>
-                            </div>
-                            <!-- Item 4 -->
-                            <div class="bulk-item-row" data-price="349"
-                                style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: var(--bg-alt); border-radius: 1.5rem;">
-                                <div>
-                                    <strong style="display: flex; align-items: center; gap: 0.5rem;">
-                                        <span data-i18n="prod5_title">58 x 36 x 12 - 14M Terminal</span>
-                                        <span class="info-trigger">ⓘ
-                                            <span class="tooltip-box" data-i18n="prod5_info">Perfect for mobile portable
-                                                terminals and handheld Bluetooth printers.</span>
-                                        </span>
-                                    </strong>
-                                    <small style="color: var(--text-light);"><span data-i18n="base_price">Base
-                                            Price</span>: 349 kr</small>
-                                </div>
-                                <div class="stepper">
-                                    <button class="bulk-qty-btn minus">-</button>
-                                    <input type="number" class="bulk-qty-input" value="0" min="0">
-                                    <button class="bulk-qty-btn plus">+</button>
-                                </div>
+                        <div id="bulk-items-container" class="bulk-item-list"
+                            style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <div class="loading-container">
+                                <div class="loading-spinner"></div>
+                                <p data-i18n="loading_products">Loading our latest inventory...</p>
                             </div>
                         </div>
                     </div>
