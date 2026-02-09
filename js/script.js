@@ -561,7 +561,11 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('cart', JSON.stringify(cart));
     };
 
-    // Make global so checkout can call it
+    // Make global so inventory loader and other scripts can use it
+    window.applyTranslations = (lang) => {
+        changeLanguage(lang);
+    };
+
     window.updateCartUI = () => {
         try {
             cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -571,12 +575,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Listen for external cart updates (e.g. from checkout page)
     window.addEventListener('cartUpdated', () => {
         window.updateCartUI();
     });
 
-    // Sync across tabs
     window.addEventListener('storage', (e) => {
         if (e.key === 'cart') {
             window.updateCartUI();
@@ -653,21 +655,79 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Product Card Quantity Logic
-    document.querySelectorAll('.product-card').forEach(card => {
-        const minusBtn = card.querySelector('.minus');
-        const plusBtn = card.querySelector('.plus');
-        const qtyInput = card.querySelector('.qty-input');
+    // --- Dynamic Product Event Delegation ---
+    document.addEventListener('click', (e) => {
+        const target = e.target;
 
-        if (minusBtn && plusBtn && qtyInput) {
-            minusBtn.addEventListener('click', () => {
+        // 1. Quantity Selector Logic
+        const qtyBtn = target.closest('.qty-btn');
+        if (qtyBtn) {
+            const card = qtyBtn.closest('.product-card');
+            const qtyInput = card.querySelector('.qty-input');
+            if (qtyInput) {
                 let val = parseInt(qtyInput.value);
-                if (val > 1) qtyInput.value = val - 1;
-            });
-            plusBtn.addEventListener('click', () => {
-                let val = parseInt(qtyInput.value);
-                qtyInput.value = val + 1;
-            });
+                if (qtyBtn.classList.contains('minus')) {
+                    if (val > 1) qtyInput.value = val - 1;
+                } else {
+                    qtyInput.value = val + 1;
+                }
+            }
+        }
+
+        // 2. Unit Selector Logic
+        const unitOption = target.closest('.unit-option');
+        if (unitOption) {
+            const card = unitOption.closest('.product-card');
+            const options = card.querySelectorAll('.unit-option');
+            const priceEl = card.querySelector('.price span');
+
+            options.forEach(opt => opt.classList.remove('active'));
+            unitOption.classList.add('active');
+
+            const unit = unitOption.dataset.unit;
+            const price = unit === 'box' ? card.dataset.boxPrice : card.dataset.rollPrice;
+            if (priceEl) priceEl.textContent = price;
+        }
+
+        // 3. Add To Cart Button Logic
+        const addToCartBtn = target.closest('.btn-secondary[data-i18n="add_to_cart"]');
+        if (addToCartBtn) {
+            const card = addToCartBtn.closest('.product-card');
+            if (!card) return; // Not a standard product card (could be bulk)
+
+            // Visual feedback Logic
+            if (addToCartBtn.classList.contains('btn-added')) return;
+
+            const qtyInput = card.querySelector('.qty-input');
+            const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
+            const activeUnit = card.querySelector('.unit-option.active');
+            const unitType = activeUnit ? activeUnit.dataset.unit : 'box';
+
+            const product = {
+                key: card.dataset.productKey,
+                name: card.querySelector('h3').textContent.split('ⓘ')[0].trim(),
+                price: parseInt(card.querySelector('.price span').textContent) || 0,
+                image: card.querySelector('img').getAttribute('src'),
+                unit: unitType
+            };
+
+            addToCart(product, quantity);
+
+            const currentLang = localStorage.getItem('preferredLang') || 'en';
+            const addedText = (translations[currentLang] && translations[currentLang].item_added)
+                ? translations[currentLang].item_added : "Added!";
+            const originalText = (translations[currentLang] && translations[currentLang].add_to_cart)
+                ? translations[currentLang].add_to_cart : "Add to Cart";
+
+            addToCartBtn.classList.add('btn-added');
+            addToCartBtn.textContent = addedText;
+
+            setTimeout(() => {
+                addToCartBtn.classList.remove('btn-added');
+                addToCartBtn.textContent = originalText;
+            }, 2000);
+
+            if (qtyInput) qtyInput.value = 1;
         }
     });
 
@@ -686,7 +746,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (productsSection) {
                     productsSection.scrollIntoView({ behavior: 'smooth' });
                 } else if (window.location.pathname.indexOf('index.html') === -1) {
-                    // If not on index, go there
                     window.location.href = 'index.html#products';
                 }
             }
@@ -697,67 +756,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cartClose) cartClose.addEventListener('click', () => window.toggleCart());
     if (cartOverlay) cartOverlay.addEventListener('click', () => window.toggleCart());
 
-    // Initial Cart Setup
-    updateCartUI();
-
-    // Unit Selector Logic
-    document.querySelectorAll('.unit-option').forEach(option => {
-        option.addEventListener('click', () => {
-            const card = option.closest('.product-card');
-            const options = card.querySelectorAll('.unit-option');
-            const priceEl = card.querySelector('.price span');
-
-            options.forEach(opt => opt.classList.remove('active'));
-            option.classList.add('active');
-
-            const unit = option.dataset.unit;
-            const price = unit === 'box' ? card.dataset.boxPrice : card.dataset.rollPrice;
-            if (priceEl) priceEl.textContent = price;
-        });
-    });
-
-    // Add To Cart buttons on main page
-    document.querySelectorAll('.btn-secondary[data-i18n="add_to_cart"]').forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-            const card = btn.closest('.product-card');
-            const qtyInput = card.querySelector('.qty-input');
-            const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
-            const activeUnit = card.querySelector('.unit-option.active');
-            const unitType = activeUnit ? activeUnit.dataset.unit : 'box';
-
-            const product = {
-                key: card.dataset.productKey,
-                name: card.querySelector('h3').textContent.split('ⓘ')[0].trim(),
-                price: parseInt(card.querySelector('.price span').textContent) || 0,
-                image: card.querySelector('img').getAttribute('src'),
-                unit: unitType
-            };
-            addToCart(product, quantity);
-
-            // Visual feedback Logic
-            if (btn.classList.contains('btn-added')) return; // Prevent spam
-
-            const currentLang = localStorage.getItem('preferredLang') || 'en';
-            const addedText = (translations[currentLang] && translations[currentLang].item_added)
-                ? translations[currentLang].item_added
-                : "Added!";
-            const originalText = (translations[currentLang] && translations[currentLang].add_to_cart)
-                ? translations[currentLang].add_to_cart
-                : "Add to Cart";
-
-            btn.classList.add('btn-added');
-            btn.textContent = addedText;
-
-            setTimeout(() => {
-                btn.classList.remove('btn-added');
-                btn.textContent = originalText;
-            }, 2000);
-
-            if (qtyInput) qtyInput.value = 1;
-        });
-    });
-
     // Initialize from local storage or default to EN
     const savedLang = localStorage.getItem('preferredLang') || 'en';
-    changeLanguage(savedLang);
+    window.applyTranslations(savedLang);
 });
