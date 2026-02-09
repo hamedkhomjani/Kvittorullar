@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - NordicRoll</title>
+    <meta name="description"
+        content="Complete your order for premium receipt rolls. Secure checkout and fast delivery.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- SEO & Social Media -->
+    <link rel="canonical" href="https://nordicroll.com/checkout.html">
+    <meta property="og:title" content="Checkout - NordicRoll">
+    <meta property="og:description" content="Securely complete your order for premium BPA-free receipt rolls.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://nordicroll.com/assets/receipt_rolls_hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Hardened Security Headers (Meta-based) -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com https://formspree.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://nordicroll.com; connect-src 'self' https://formspree.io https://api.zippopotam.us https://script.google.com https://script.googleusercontent.com; frame-ancestors 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <script src="js/translations.js"></script>
+    <script src="js/components.js"></script>
+</head>
+
+<body class="checkout-page">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header id="header-placeholder" class="header"></header>
+
+    <main id="main-content" class="container" style="padding-top: 150px; padding-bottom: 100px;">
+        <h1 data-i18n="checkout_title" style="margin-bottom: 3rem; text-align: center;">Checkout</h1>
+
+        <div class="checkout-grid">
+            <!-- Left Side: Shipping Form -->
+            <section class="checkout-form-section">
+                <div class="checkout-card">
+                    <h2 data-i18n="shipping_info">Shipping Information</h2>
+                    <form id="checkout-form" class="checkout-form">
+                        <!-- Security: Honeypot field for bot protection -->
+                        <input type="text" name="bot_field" style="display:none !important" tabindex="-1"
+                            autocomplete="off">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkout-name" data-i18n="full_name">Full Name</label>
+                                <input type="text" id="checkout-name" name="name" required placeholder="John Doe">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkout-email" data-i18n="email">Email</label>
+                                <div style="position: relative;">
+                                    <input type="email" id="checkout-email" name="email" required
+                                        placeholder="john@example.com">
+                                    <span id="email-status"
+                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkout-phone" data-i18n="phone">Phone</label>
+                                <div style="position: relative;">
+                                    <input type="tel" id="checkout-phone" name="phone" required
+                                        placeholder="070 123 45 67">
+                                    <span id="phone-status"
+                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkout-address" data-i18n="address">Address</label>
+                                <div style="position: relative;">
+                                    <input type="text" id="checkout-address" name="address" required
+                                        placeholder="Storgatan 12">
+                                    <span id="address-status"
+                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="checkout-zip" data-i18n="zip_code">Zip Code</label>
+                                <div style="position: relative;">
+                                    <input type="text" id="checkout-zip" name="zip" required placeholder="123 45">
+                                    <span id="zip-status"
+                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+                                </div>
+                                <small id="zip-msg"
+                                    style="display: block; margin-top: 0.4rem; font-size: 0.8rem; min-height: 1em;"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkout-city" data-i18n="city">City</label>
+                                <input type="text" id="checkout-city" name="city" required placeholder="Stockholm">
+                            </div>
+                        </div>
+
+                        <h2 data-i18n="payment_method" style="margin-top: 3rem;">Payment Method</h2>
+                        <div class="payment-methods">
+                            <label class="payment-option active">
+                                <input type="radio" name="payment" value="invoice" checked>
+                                <div class="option-content">
+                                    <span class="icon">📄</span>
+                                    <span data-i18n="pay_invoice">Invoice</span>
+                                </div>
+                            </label>
+                            <label class="payment-option">
+                                <input type="radio" name="payment" value="card">
+                                <div class="option-content">
+                                    <span class="icon">💳</span>
+                                    <span data-i18n="pay_card">Card</span>
+                                </div>
+                            </label>
+                            <label class="payment-option swish-option">
+                                <input type="radio" name="payment" value="swish">
+                                <div class="option-content">
+                                    <span class="icon">📲</span>
+                                    <span data-i18n="pay_swish">Swish</span>
+                                </div>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Right Side: Order Summary -->
+            <section class="checkout-summary-section">
+                <div class="checkout-card summary-card sticky-summary">
+                    <h2 data-i18n="order_summary">Order Summary</h2>
+                    <div id="checkout-items" class="checkout-items-list">
+                        <!-- Items injected by JS -->
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <div class="summary-line">
+                        <span data-i18n="shipping_free">Free Shipping</span>
+                        <span style="color: #059669; font-weight: 600;">0 kr</span>
+                    </div>
+                    <div class="summary-line total">
+                        <span data-i18n="total_msg">Total to pay</span>
+                        <span id="checkout-total">0 kr</span>
+                    </div>
+
+                    <button type="submit" id="submit-order-btn" form="checkout-form" class="btn btn-primary w-full"
+                        style="margin-top: 2rem; padding: 1.2rem;" data-i18n="place_order">
+                        Place Order
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer id="footer-placeholder" class="footer"></footer>
+
+    <div id="cart-placeholder"></div>
+    <div id="contact-modal-placeholder"></div>
+
+    <!-- Success Modal -->
+    <div id="order-success-modal" class="modal">
+        <div class="modal-overlay" id="success-overlay"></div>
+        <div class="modal-content" style="text-align:center; padding: 4rem 2rem;">
+            <div style="font-size: 5rem; margin-bottom: 1rem;">🎉</div>
+            <h2 data-i18n="order_success">Order Successful!</h2>
+            <p data-i18n="order_success_desc" style="color: var(--text-light); margin-bottom: 1rem;">Thank you for your
+                business. We've received your request.</p>
+            <div style="background: var(--bg-alt); padding: 1rem; border-radius: 0.8rem; margin-bottom: 2rem;">
+                <span data-i18n="order_number">Order Number</span>: <strong id="order-number-display"
+                    style="color: var(--primary);">#</strong>
+            </div>
+            <button id="success-done" class="btn btn-primary" data-i18n="finalize_btn">Finish</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/checkout_logic.js"></script>
+</body>
+
+</html>

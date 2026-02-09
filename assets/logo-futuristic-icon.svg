@@ -1,0 +1,51 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Gradient -->
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow -->
+    <filter id="iconGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="80" height="80" rx="18" fill="url(#grad)"/>
+  
+  <!-- Tech Grid Pattern -->
+  <line x1="20" y1="0" x2="20" y2="80" stroke="white" stroke-width="0.5" opacity="0.1"/>
+  <line x1="40" y1="0" x2="40" y2="80" stroke="white" stroke-width="0.5" opacity="0.1"/>
+  <line x1="60" y1="0" x2="60" y2="80" stroke="white" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="20" x2="80" y2="20" stroke="white" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="40" x2="80" y2="40" stroke="white" stroke-width="0.5" opacity="0.1"/>
+  <line x1="0" y1="60" x2="80" y2="60" stroke="white" stroke-width="0.5" opacity="0.1"/>
+  
+  <!-- Hexagon -->
+  <g transform="translate(40, 40)">
+    <polygon points="0,-22 19.05,-11 19.05,11 0,22 -19.05,11 -19.05,-11" 
+             fill="none" stroke="white" stroke-width="2" opacity="0.3"/>
+    <polygon points="0,-18 15.59,-9 15.59,9 0,18 -15.59,9 -15.59,-9" 
+             fill="none" stroke="white" stroke-width="2.5" filter="url(#iconGlow)"/>
+    
+    <!-- N Letter -->
+    <text x="0" y="10" font-family="'Orbitron', 'Inter', sans-serif" 
+          font-size="32" font-weight="900" fill="white" text-anchor="middle" filter="url(#iconGlow)">
+      N
+    </text>
+  </g>
+  
+  <!-- Corner Tech Details -->
+  <circle cx="15" cy="15" r="2" fill="white" opacity="0.4"/>
+  <circle cx="65" cy="15" r="2" fill="white" opacity="0.4"/>
+  <circle cx="15" cy="65" r="2" fill="white" opacity="0.4"/>
+  <circle cx="65" cy="65" r="2" fill="white" opacity="0.4"/>
+</svg>

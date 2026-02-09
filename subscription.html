@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prenumerera på Kvittorullar - NordicRoll</title>
+    <meta name="description"
+        content="Smidig prenumeration på BPA-fria kvittorullar. Välj storlek, antal och frekvens för automatisk leverans.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- SEO & Language Alternates -->
+    <link rel="alternate" hreflang="sv" href="https://nordicroll.com/subscription.html" />
+    <link rel="alternate" hreflang="en" href="https://nordicroll.com/subscription.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nordicroll.com/subscription.html" />
+
+    <script src="js/translations.js"></script>
+    <script src="js/components.js"></script>
+</head>
+
+<body class="subscription-page">
+    <header id="header-placeholder" class="header"></header>
+
+    <main id="main-content" class="container" style="padding-top: 150px; padding-bottom: 100px;">
+        <div class="sub-page-hero">
+            <span class="sub-header-badge" data-i18n="sub_badge">Smart Business Refill</span>
+            <h1 data-i18n="sub_build_title">Your Custom Subscription</h1>
+            <p data-i18n="sub_build_desc" style="color: var(--text-light); font-size: 1.1rem;">Customize your delivery
+                plan to fit your business needs perfectly.</p>
+        </div>
+
+        <div class="configurator-grid">
+            <!-- Builder Steps -->
+            <div class="builder-inputs">
+                <!-- Combined Step 1 & 2: Products & Quality -->
+                <section class="config-step">
+                    <h3><span class="step-dot">1</span> <span data-i18n="step_configure_items">Configure Your
+                            Boxes</span></h3>
+                    <div class="sub-item-list">
+                        <!-- 80x80x12 - 40M -->
+                        <div class="sub-item-row" data-id="80x80" data-base-price="699">
+                            <div class="item-meta">
+                                <strong data-i18n="prod1_title">80 x 80 x 12 - 40M Standard POS</strong>
+                                <small>699 kr / box (30 Rolls)</small>
+                            </div>
+                            <div class="item-controls">
+                                <div class="quality-toggle" data-addon="20">
+                                    <button class="toggle-btn active" data-quality="standard"
+                                        data-i18n="standard_base">Standard</button>
+                                    <button class="toggle-btn" data-quality="bpa-free"
+                                        data-i18n="bpa_free_eco">Eco</button>
+                                </div>
+                                <div class="stepper">
+                                    <button class="step-btn minus text-2xl" style="line-height: 0;">-</button>
+                                    <input type="number" class="step-input" value="3" min="0" max="50">
+                                    <button class="step-btn plus text-2xl" style="line-height: 0;">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 80x45x12 - 16M -->
+                        <div class="sub-item-row" data-id="80x45" data-base-price="599">
+                            <div class="item-meta">
+                                <strong data-i18n="prod2_title">80 x 45 x 12 - 16M Standard POS</strong>
+                                <small>599 kr / box (30 Rolls)</small>
+                            </div>
+                            <div class="item-controls">
+                                <div class="quality-toggle" data-addon="20">
+                                    <button class="toggle-btn active" data-quality="standard"
+                                        data-i18n="standard_base">Standard</button>
+                                    <button class="toggle-btn" data-quality="bpa-free"
+                                        data-i18n="bpa_free_eco">Eco</button>
+                                </div>
+                                <div class="stepper">
+                                    <button class="step-btn minus">-</button>
+                                    <input type="number" class="step-input" value="0" min="0" max="50">
+                                    <button class="step-btn plus">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 57x58x12 - 40M -->
+                        <div class="sub-item-row" data-id="57x58" data-base-price="549">
+                            <div class="item-meta">
+                                <strong data-i18n="prod4_title">57 x 58 x 12 - 40M</strong>
+                                <small>549 kr / box (30 Rolls)</small>
+                            </div>
+                            <div class="item-controls">
+                                <div class="quality-toggle" data-addon="20">
+                                    <button class="toggle-btn active" data-quality="standard"
+                                        data-i18n="standard_base">Standard</button>
+                                    <button class="toggle-btn" data-quality="bpa-free"
+                                        data-i18n="bpa_free_eco">Eco</button>
+                                </div>
+                                <div class="stepper">
+                                    <button class="step-btn minus">-</button>
+                                    <input type="number" class="step-input" value="0" min="0" max="50">
+                                    <button class="step-btn plus">+</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 58x36x12 - 14M -->
+                        <div class="sub-item-row" data-id="58x36" data-base-price="349">
+                            <div class="item-meta">
+                                <strong data-i18n="prod5_title">58 x 36 x 12 - 14M Terminal</strong>
+                                <small>349 kr / box (30 Rolls)</small>
+                            </div>
+                            <div class="item-controls">
+                                <div class="quality-toggle" data-addon="20">
+                                    <button class="toggle-btn active" data-quality="standard"
+                                        data-i18n="standard_base">Standard</button>
+                                    <button class="toggle-btn" data-quality="bpa-free"
+                                        data-i18n="bpa_free_eco">Eco</button>
+                                </div>
+                                <div class="stepper">
+                                    <button class="step-btn minus">-</button>
+                                    <input type="number" class="step-input" value="0" min="0" max="50">
+                                    <button class="step-btn plus">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 3: Frequency -->
+                <section class="config-step">
+                    <h3><span class="step-dot">2</span> <span data-i18n="step_frequency">Delivery Frequency</span></h3>
+                    <div class="freq-options">
+                        <div class="freq-card active" data-freq="1" data-discount="15">
+                            <strong data-i18n="freq_1_month">1 Month</strong>
+                            <span style="font-size: 0.8rem; display: block; margin-top: 0.3rem;"
+                                data-i18n="save_15">Save 15%</span>
+                        </div>
+                        <div class="freq-card" data-freq="2" data-discount="10">
+                            <strong data-i18n="freq_2_months">2 Months</strong>
+                            <span style="font-size: 0.8rem; display: block; margin-top: 0.3rem;"
+                                data-i18n="save_10">Save 10%</span>
+                        </div>
+                        <div class="freq-card" data-freq="3" data-discount="5">
+                            <strong data-i18n="freq_quarterly">Quarterly</strong>
+                            <span style="font-size: 0.8rem; display: block; margin-top: 0.3rem;" data-i18n="save_5">Save
+                                5%</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Shipping Form -->
+                <section class="config-step" id="shipping-section">
+                    <h3 data-i18n="shipping_info">Shipping Details</h3>
+                    <form id="subscription-form" class="checkout-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sub-name" data-i18n="full_name">Full Name</label>
+                                <input type="text" id="sub-name" name="name" required placeholder="John Doe">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sub-email" data-i18n="email">Email</label>
+                                <div style="position: relative;">
+                                    <input type="email" id="sub-email" name="email" required
+                                        placeholder="john@example.com">
+                                    <span id="email-status"
+                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="sub-phone" data-i18n="phone">Phone</label>
+                                <div style="position: relative;">
+                                    <input type="tel" id="sub-phone" name="phone" required placeholder="070 123 45 67">
+                                    <span id="phone-status"
+                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sub-address" data-i18n="address">Address</label>
+                                <div style="position: relative;">
+                                    <input type="text" id="sub-address" name="address" required
+                                        placeholder="Storgatan 12">
+                                    <span id="address-status"
+                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="sub-zip" data-i18n="zip_code">Zip Code</label>
+                                <div style="position: relative;">
+                                    <input type="text" id="sub-zip" name="zip" required placeholder="123 45">
+                                    <span id="zip-status"
+                                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); font-size: 1.2rem;"></span>
+                                </div>
+                                <small id="zip-msg"
+                                    style="display: block; margin-top: 0.4rem; font-size: 0.8rem; min-height: 1em;"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="sub-city" data-i18n="city">City</label>
+                                <input type="text" id="sub-city" name="city" required placeholder="Stockholm">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-full" style="margin-top: 2rem; padding: 1.2rem;"
+                            data-i18n="confirm_subscription">
+                            Activate Subscription
+                        </button>
+                    </form>
+                </section>
+            </div>
+
+            <!-- Sticky Summary Card -->
+            <div class="sticky-summary">
+                <div class="savings-tag">✨ Saving <span id="savings-amount">15</span>% with subscription</div>
+                <h2 data-i18n="subscription_summary" style="margin-bottom: 2rem;">Subscription Plan</h2>
+
+                <div id="summary-items-list"
+                    style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                    <!-- Items will be injected here -->
+                </div>
+
+                <div class="summary-row">
+                    <span data-i18n="frequency">Frequency</span>
+                    <strong id="summary-freq">Monthly</strong>
+                </div>
+
+                <div class="summary-row total">
+                    <span data-i18n="total_per_delivery">Total / Delivery</span>
+                    <span id="summary-total">1,782 kr</span>
+                </div>
+
+                <div id="min-limit-warning"
+                    style="display: none; margin-top: 1rem; padding: 0.8rem; background: #fff1f2; border: 1px solid #fda4af; border-radius: 0.8rem; color: #9f1239; font-size: 0.85rem; font-weight: 600;">
+                    ⚠️ <span data-i18n="min_sub_limit">Minimum subscription total is 500 kr/month</span>
+                </div>
+
+                <div
+                    style="margin-top: 2rem; padding: 1rem; background: var(--bg-alt); border-radius: 1rem; font-size: 0.85rem; color: var(--text-light); line-height: 1.5;">
+                    💡 Tips: Automatic refills ensure you never run out. No hidden fees, cancel anytime via email.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer id="footer-placeholder" class="footer"></footer>
+
+    <!-- Success Modal -->
+    <div id="order-success-modal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content" style="text-align:center; padding: 4rem 2rem;">
+            <div style="font-size: 5rem; margin-bottom: 1rem;">🚀</div>
+            <h2 data-i18n="sub_success_title">Subscription Active!</h2>
+            <p data-i18n="sub_success_desc" style="color: var(--text-light); margin-bottom: 2rem;">Welcome to the
+                family. Your first box is being prepared.</p>
+            <button id="go-home-success" class="btn btn-primary">Go to Home</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/subscription_logic.js"></script>
+</body>
+
+</html>

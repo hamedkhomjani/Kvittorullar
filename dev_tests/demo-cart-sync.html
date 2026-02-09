@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart & Checkout Demo - NordicRoll</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        body {
+            padding-top: 100px;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .demo-section {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--bg-alt);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-demo {
+            background: var(--bg-alt);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+
+        .product-demo img {
+            width: 100%;
+            max-width: 200px;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .status-box {
+            background: #f0f9ff;
+            border: 2px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .status-box pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.875rem;
+        }
+    </style>
+    <script src="../js/translations.js"></script>
+    <script src="../js/components.js"></script>
+</head>
+
+<body>
+    <header id="header-placeholder" class="header"></header>
+
+    <div class="demo-container">
+        <h1 style="text-align: center; margin-bottom: 2rem;">🛒 Cart & Checkout Demo</h1>
+
+        <!-- Demo Products -->
+        <div class="demo-section">
+            <h2>📦 Demo Products</h2>
+            <p>Add these products to your cart to test the sync between Shopping Cart and Checkout:</p>
+
+            <div class="demo-grid">
+                <div class="product-demo">
+                    <img src="../assets/receipt_rolls_hero.png" alt="Premium Roll"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23e5e7eb%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22%3EPremium Roll%3C/text%3E%3C/svg%3E'">
+                    <h3>Premium Receipt Roll</h3>
+                    <p class="price" style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">99 kr
+                    </p>
+                    <button class="btn btn-primary"
+                        onclick="addDemoProduct('Premium Receipt Roll', 99, 'assets/receipt_rolls_hero.png')">
+                        Add to Cart
+                    </button>
+                </div>
+
+                <div class="product-demo">
+                    <img src="../assets/receipt_rolls_hero.png" alt="Standard Roll"
+                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22200%22 height=%22200%22%3E%3Crect fill=%22%23e5e7eb%22 width=%22200%22 height=%22200%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22%3EStandard Roll%3C/text%3E%3C/svg%3E'">
+                    <h3>Standard Receipt Roll</h3>
+                    <p class="price" style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">79 kr
+                    </p>
+                    <button class="btn btn-primary"
+                        onclick="addDemoProduct('Standard Receipt Roll', 79, 'assets/receipt_rolls_hero.png')">
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="demo-section">
+            <h2>🎯 Actions</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="document.getElementById('cart-toggle').click()">
+                    🛒 Open Shopping Cart
+                </button>
+                <button class="btn btn-primary" onclick="window.location.href='../checkout.html'">
+                    💳 Go to Checkout Page
+                </button>
+                <button class="btn btn-secondary" onclick="showCartStatus()">
+                    🔄 Refresh Cart Status
+                </button>
+                <button class="btn btn-secondary" onclick="clearCart()" style="background: #ef4444;">
+                    🗑️ Clear Cart
+                </button>
+            </div>
+        </div>
+
+        <!-- Cart Status -->
+        <div class="demo-section">
+            <h2>📊 Current Cart Status</h2>
+            <div id="cart-status" class="status-box">
+                <p>Loading...</p>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="demo-section">
+            <h2>📝 How to Test</h2>
+            <ol style="line-height: 2;">
+                <li>Click "Add to Cart" on one or both products above</li>
+                <li>Click "Open Shopping Cart" to see items in the cart drawer</li>
+                <li>Click "Go to Checkout Page" to see the same items in Order Summary</li>
+                <li>Try removing items from either place - they should sync!</li>
+                <li>Open in multiple tabs to test cross-tab sync</li>
+            </ol>
+        </div>
+    </div>
+
+    <footer id="footer-placeholder" class="footer"></footer>
+    <div id="cart-placeholder"></div>
+    <div id="contact-modal-placeholder"></div>
+
+    <script src="../js/script.js"></script>
+    <script>
+        function addDemoProduct(name, price, image) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if product already exists
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1,
+                    image: image
+                });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Trigger cart update
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
+
+            // Update UI
+            if (typeof window.updateCartUI === 'function') {
+                window.updateCartUI();
+            }
+
+            // Show feedback
+            showCartStatus();
+
+            // Visual feedback
+            event.target.textContent = '✅ Added!';
+            event.target.disabled = true;
+            setTimeout(() => {
+                event.target.textContent = 'Add to Cart';
+                event.target.disabled = false;
+            }, 1500);
+        }
+
+        function showCartStatus() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const statusDiv = document.getElementById('cart-status');
+
+            if (cart.length === 0) {
+                statusDiv.innerHTML = '<p style="color: #ef4444; font-weight: bold;">❌ Cart is empty</p>';
+            } else {
+                let html = '<p style="color: #059669; font-weight: bold;">✅ Cart has ' + cart.length + ' item(s):</p>';
+                html += '<pre>' + JSON.stringify(cart, null, 2) + '</pre>';
+                statusDiv.innerHTML = html;
+            }
+        }
+
+        function clearCart() {
+            if (confirm('Are you sure you want to clear the cart?')) {
+                localStorage.removeItem('cart');
+                window.dispatchEvent(new CustomEvent('cartUpdated'));
+                if (typeof window.updateCartUI === 'function') {
+                    window.updateCartUI();
+                }
+                showCartStatus();
+            }
+        }
+
+        // Show cart status on load
+        document.addEventListener('DOMContentLoaded', () => {
+            showCartStatus();
+
+            // Listen for cart updates
+            window.addEventListener('cartUpdated', showCartStatus);
+            window.addEventListener('storage', (e) => {
+                if (e.key === 'cart') {
+                    showCartStatus();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

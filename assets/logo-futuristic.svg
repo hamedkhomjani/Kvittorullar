@@ -1,0 +1,75 @@
+<svg width="240" height="80" viewBox="0 0 240 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Futuristic Gradient -->
+    <linearGradient id="futuristicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Glow Effect -->
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Neon Glow -->
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Futuristic Background Circle -->
+  <circle cx="40" cy="40" r="35" fill="url(#futuristicGrad)" opacity="0.1"/>
+  <circle cx="40" cy="40" r="30" fill="none" stroke="url(#futuristicGrad)" stroke-width="0.5" opacity="0.3"/>
+  
+  <!-- 3D Hexagon Base -->
+  <g transform="translate(40, 40)">
+    <!-- Hexagon Layers -->
+    <polygon points="0,-20 17.32,-10 17.32,10 0,20 -17.32,10 -17.32,-10" 
+             fill="url(#futuristicGrad)" opacity="0.2"/>
+    <polygon points="0,-18 15.59,-9 15.59,9 0,18 -15.59,9 -15.59,-9" 
+             fill="none" stroke="url(#futuristicGrad)" stroke-width="1.5" filter="url(#glow)"/>
+    
+    <!-- Inner Tech Lines -->
+    <line x1="-12" y1="0" x2="12" y2="0" stroke="#6366f1" stroke-width="1" opacity="0.6"/>
+    <line x1="0" y1="-12" x2="0" y2="12" stroke="#6366f1" stroke-width="1" opacity="0.6"/>
+    
+    <!-- Central N -->
+    <text x="0" y="8" font-family="'Orbitron', 'Inter', sans-serif" font-size="24" font-weight="900" 
+          fill="white" text-anchor="middle" filter="url(#neonGlow)">N</text>
+  </g>
+  
+  <!-- Tech Corner Accents -->
+  <path d="M 75 25 L 80 25 L 80 30" stroke="url(#futuristicGrad)" stroke-width="2" opacity="0.4" fill="none"/>
+  <path d="M 75 55 L 80 55 L 80 50" stroke="url(#futuristicGrad)" stroke-width="2" opacity="0.4" fill="none"/>
+  
+  <!-- NordicRoll Text with Futuristic Font -->
+  <text x="90" y="42" font-family="'Orbitron', 'Rajdhani', 'Inter', sans-serif" 
+        font-size="26" font-weight="900" fill="url(#futuristicGrad)" letter-spacing="1">
+    NORDICROLL
+  </text>
+  
+  <!-- Glowing Underline -->
+  <line x1="90" y1="48" x2="230" y2="48" stroke="url(#futuristicGrad)" stroke-width="2" opacity="0.3"/>
+  <line x1="90" y1="48" x2="160" y2="48" stroke="#6366f1" stroke-width="1" filter="url(#glow)"/>
+  
+  <!-- Tech Tagline -->
+  <text x="90" y="60" font-family="'Rajdhani', 'Inter', sans-serif" 
+        font-size="9" font-weight="600" fill="#64748b" letter-spacing="2">
+    PREMIUM THERMAL TECHNOLOGY
+  </text>
+  
+  <!-- Animated Dots (Static in SVG, but gives tech feel) -->
+  <circle cx="85" cy="35" r="1.5" fill="#6366f1" opacity="0.6"/>
+  <circle cx="85" cy="42" r="1.5" fill="#3b82f6" opacity="0.8"/>
+  <circle cx="85" cy="49" r="1.5" fill="#6d28d9" opacity="0.6"/>
+</svg>

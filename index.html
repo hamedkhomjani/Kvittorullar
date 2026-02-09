@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NordicRoll - Premium Receipt Rolls</title>
+    <meta name="description"
+        content="Premium BPA-free thermal receipt rolls for businesses. High-quality paper, fast delivery across Scandinavia, and custom branding options.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://script.google.com">
+    <link rel="dns-prefetch" href="https://formspree.io">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- SEO & Social Media -->
+    <link rel="canonical" href="https://nordicroll.com/">
+    <meta property="og:title" content="NordicRoll - Premium BPA-Free Receipt Rolls">
+    <meta property="og:description"
+        content="High-quality thermal paper for businesses. Fast delivery and eco-friendly options.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nordicroll.com/">
+    <meta property="og:image" content="https://nordicroll.com/assets/receipt_rolls_hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="author" content="NordicRoll">
+    <meta name="keywords" content="kvittorullar, termopapper, BPA-fria, receipt rolls, thermal paper, b2b, sweden">
+
+    <!-- Language Alternates for SEO -->
+    <link rel="alternate" hreflang="sv" href="https://nordicroll.com/" />
+    <link rel="alternate" hreflang="en" href="https://nordicroll.com/" />
+    <link rel="alternate" hreflang="x-default" href="https://nordicroll.com/" />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "NordicRoll",
+        "url": "https://nordicroll.com/",
+        "logo": "https://nordicroll.com/assets/logo.svg",
+        "description": "Sweden's leading supplier of BPA-free thermal receipt rolls.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Stockholm",
+          "addressCountry": "SE"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "name": "80x80mm Standard POS Receipt Rolls",
+        "image": "https://nordicroll.com/assets/receipt_rolls_hero.png",
+        "description": "Premium BPA-free thermal paper rolls for standard POS systems.",
+        "offers": {
+          "@type": "Offer",
+          "price": "249",
+          "priceCurrency": "SEK",
+          "availability": "https://schema.org/InStock"
+        }
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+          "@type": "Question",
+          "name": "Are your rolls BPA-free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, all our thermal paper rolls are 100% BPA-free and safe for use."
+          }
+        }, {
+          "@type": "Question",
+          "name": "How fast is the shipping?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We offer express delivery within 1-2 business days across Sweden."
+          }
+        }]
+      }
+    ]
+    </script>
+
+    <!-- Hardened Security Headers (Meta-based) -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com https://formspree.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://nordicroll.com; connect-src 'self' https://formspree.io https://script.google.com https://script.googleusercontent.com; frame-ancestors 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <script src="js/translations.js"></script>
+    <script src="js/components.js"></script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header id="header-placeholder" class="header"></header>
+
+    <main id="main-content">
+        <section class="hero">
+            <div class="hero-bg-blobs">
+                <div class="blob blob-1"></div>
+                <div class="blob blob-2"></div>
+            </div>
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1 data-i18n="hero_title">Premium Thermal Receipt Rolls</h1>
+                    <p data-i18n="hero_subtitle">High-quality, BPA-free paper for all your business needs. Sharp prints,
+                        long-lasting durability.</p>
+                    <a href="#products" class="btn btn-primary" data-i18n="hero_cta">Shop Now</a>
+                </div>
+                <div class="hero-image-container">
+                    <div class="hero-glow"></div>
+                    <img src="assets/receipt_rolls_hero.png" alt="NordicRoll Premium Receipt Rolls" class="hero-img"
+                        fetchpriority="high" decoding="async">
+                    <div class="floating-badge">
+                        <div class="badge-icon">✓</div>
+                        <div class="badge-text">
+                            <span data-i18n="about_stat_rolls">Rolls Delivered</span>
+                            <strong>1M+</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Trust & Reliability Bar -->
+        <section class="trust-bar">
+            <div class="container trust-grid">
+                <div class="trust-item">
+                    <span class="trust-icon">🛡️</span>
+                    <div class="trust-text">
+                        <strong data-i18n="trust_durability">25-Year Durability</strong>
+                        <span data-i18n="trust_guarantee">Verified Swedish quality</span>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🚀</span>
+                    <div class="trust-text">
+                        <strong data-i18n="trust_shipping">Free Express Delivery</strong>
+                        <span data-i18n="trust_min">Orders over 1000 kr</span>
+                    </div>
+                </div>
+                <div class="trust-item">
+                    <span class="trust-icon">🌿</span>
+                    <div class="trust-text">
+                        <strong data-i18n="trust_safety">BPA Free & Safe</strong>
+                        <span data-i18n="trust_toxic">100% non-toxic paper</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="features" class="features container bento-grid">
+            <div class="feature-card bento-item-large">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                    </svg>
+                </div>
+                <h3 data-i18n="feat1_title">BPA Free</h3>
+                <p data-i18n="feat1_desc">Safe for your customers and employees. 100% BPA free thermal paper for
+                    eco-conscious businesses.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="21 8 21 21 3 21 3 8"></polyline>
+                        <rect x="1" y="3" width="22" height="5"></rect>
+                        <line x1="10" y1="12" x2="14" y2="12"></line>
+                    </svg>
+                </div>
+                <h3 data-i18n="feat3_title">Standard Sizes</h3>
+                <p data-i18n="feat3_desc">Universal compatibility.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                    </svg>
+                </div>
+                <h3 data-i18n="feat2_title">High Clarity</h3>
+                <p data-i18n="feat2_desc">Crystal clear printing properties.</p>
+            </div>
+            <div class="feature-card bento-item-wide">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="3" width="15" height="13"></rect>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+                        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+                        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+                    </svg>
+                </div>
+                <h3 data-i18n="feat4_title">Fast Delivery</h3>
+                <p data-i18n="feat4_desc">Get your rolls within 24-48 hours with our express logistics network.</p>
+            </div>
+        </section>
+
+        <!-- Products -->
+        <section id="products" class="products container">
+            <h2 class="section-title" data-i18n="products_title">Our Best Sellers</h2>
+            <div class="product-grid">
+                <!-- Product 1: 80x80 -->
+                <div class="product-card" data-product-key="prod1" data-box-price="699" data-roll-price="29">
+                    <span class="card-badge" data-i18n="badge_best_value">BEST VALUE</span>
+                    <div class="product-preview">
+                        <img src="assets/receipt_rolls_hero.png" alt="NordicRoll Premium BPA-free thermal receipt rolls"
+                            loading="lazy">
+                    </div>
+                    <div class="product-info">
+                        <h3>
+                            <span data-i18n="prod1_title">80 x 80 x 12 - 40M Standard POS</span>
+                            <span class="info-trigger">ⓘ
+                                <span class="tooltip-box" data-i18n="prod1_info">Ideal for restaurant printers, Star
+                                    Micronics, and Epson T88 series.</span>
+                            </span>
+                        </h3>
+                        <div class="unit-selector">
+                            <div class="unit-option active" data-unit="box" data-i18n="box">Box</div>
+                            <div class="unit-option" data-unit="roll" data-i18n="roll">Roll</div>
+                        </div>
+                        <p class="price"><span>699</span> kr</p>
+                        <div class="quantity-selector">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" value="1" min="1">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="btn btn-secondary" data-i18n="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 2: 80x45 -->
+                <div class="product-card" data-product-key="prod2" data-box-price="599" data-roll-price="25">
+                    <div class="product-preview">
+                        <img src="assets/receipt_rolls_hero.png" alt="80x45mm Standard POS">
+                    </div>
+                    <div class="product-info">
+                        <h3>
+                            <span data-i18n="prod2_title">80 x 45 x 12 - 16M Standard POS</span>
+                            <span class="info-trigger">ⓘ
+                                <span class="tooltip-box" data-i18n="prod2_info">Compact version for smaller POS docks
+                                    and kitchen printers.</span>
+                            </span>
+                        </h3>
+                        <div class="unit-selector">
+                            <div class="unit-option active" data-unit="box" data-i18n="box">Box</div>
+                            <div class="unit-option" data-unit="roll" data-i18n="roll">Roll</div>
+                        </div>
+                        <p class="price"><span>599</span> kr</p>
+                        <div class="quantity-selector">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" value="1" min="1">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="btn btn-secondary" data-i18n="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 3: 57x58 -->
+                <div class="product-card" data-product-key="prod4" data-box-price="549" data-roll-price="19">
+                    <div class="product-preview">
+                        <img src="assets/receipt_rolls_hero.png" alt="57x58mm POS">
+                    </div>
+                    <div class="product-info">
+                        <h3>
+                            <span data-i18n="prod4_title">57 x 58 x 12 - 40M</span>
+                            <span class="info-trigger">ⓘ
+                                <span class="tooltip-box" data-i18n="prod4_info">Standard size for desktop card
+                                    terminals and bank POS systems.</span>
+                            </span>
+                        </h3>
+                        <div class="unit-selector">
+                            <div class="unit-option active" data-unit="box" data-i18n="box">Box</div>
+                            <div class="unit-option" data-unit="roll" data-i18n="roll">Roll</div>
+                        </div>
+                        <p class="price"><span>549</span> kr</p>
+                        <div class="quantity-selector">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" value="1" min="1">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="btn btn-secondary" data-i18n="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 4: 58x36 -->
+                <div class="product-card" data-product-key="prod5" data-box-price="349" data-roll-price="15">
+                    <div class="product-preview">
+                        <img src="assets/receipt_rolls_hero.png" alt="58x36mm Terminal">
+                    </div>
+                    <div class="product-info">
+                        <h3>
+                            <span data-i18n="prod5_title">58 x 36 x 12 - 14M Terminal</span>
+                            <span class="info-trigger">ⓘ
+                                <span class="tooltip-box" data-i18n="prod5_info">Perfect for mobile portable terminals
+                                    and handheld Bluetooth printers.</span>
+                            </span>
+                        </h3>
+                        <div class="unit-selector">
+                            <div class="unit-option active" data-unit="box" data-i18n="box">Box</div>
+                            <div class="unit-option" data-unit="roll" data-i18n="roll">Roll</div>
+                        </div>
+                        <p class="price"><span>349</span> kr</p>
+                        <div class="quantity-selector">
+                            <button class="qty-btn minus">-</button>
+                            <input type="number" class="qty-input" value="1" min="1">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                        <button class="btn btn-secondary" data-i18n="add_to_cart">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Bulk Case -->
+                <div class="product-card">
+                    <div class="product-preview">
+                        <img src="assets/receipt_rolls_hero.png" alt="Bulk Thermal Rolls">
+                    </div>
+                    <div class="product-info">
+                        <h3 data-i18n="prod3_title">Bulk & Custom Orders</h3>
+                        <p class="price" data-i18n="contact_pricing" style="margin-bottom: 2rem;">Contact for pricing
+                        </p>
+                        <a href="bulk.html" class="btn btn-secondary" data-i18n="get_quote">Get Quote</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="subscriptions" class="subscriptions container">
+            <div class="subscription-header">
+                <h2 data-i18n="sub_title">Subscription Plans</h2>
+                <p data-i18n="sub_desc">Save up to 15% with our hassle-free monthly delivery service. Never run out of
+                    receipt rolls again.</p>
+            </div>
+            <div class="subscription-grid">
+                <div class="subscription-card">
+                    <div class="sub-badge" data-i18n="most_popular">Most Popular</div>
+                    <h3 data-i18n="sub1_name">Monthly Refill</h3>
+                    <p class="sub-price">1,782 kr<span data-i18n="per_month">/month</span></p>
+                    <ul class="sub-features">
+                        <li data-i18n="sub1_feat1">3 boxes of 80mm rolls</li>
+                        <li data-i18n="sub1_feat2">Free express shipping</li>
+                        <li data-i18n="sub1_feat3">Priority Support</li>
+                        <li data-i18n="sub1_feat4">Cancel anytime</li>
+                    </ul>
+                    <a href="subscription.html" class="btn btn-primary" data-i18n="subscribe">Subscribe Now</a>
+                </div>
+                <div class="subscription-card">
+                    <h3 data-i18n="sub2_name">Enterprise Plan</h3>
+                    <p class="sub-price"><span data-i18n="custom">Custom</span><span data-i18n="per_month">/month</span>
+                    </p>
+                    <ul class="sub-features">
+                        <li data-i18n="sub2_feat1">Bulk quantities</li>
+                        <li data-i18n="sub2_feat2">Custom brand printing</li>
+                        <li data-i18n="sub2_feat3">Dedicated account manager</li>
+                        <li data-i18n="sub2_feat4">Flexible scheduling</li>
+                    </ul>
+                    <button class="btn btn-secondary" data-i18n="contact_sales_btn">Contact Sales</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials container">
+            <h2 data-i18n="testi_title">What Our Customers Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p data-i18n="testi1_text">"Best quality rolls we've ever used. The print is always sharp and they
+                        never jam."</p>
+                    <div class="client-info">
+                        <strong>Erik J.</strong>
+                        <span data-i18n="testi1_sub">Restaurant Owner</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p data-i18n="testi2_text">"The subscription service is a lifesaver. One less thing to worry about
+                        every month."</p>
+                    <div class="client-info">
+                        <strong>Sarah W.</strong>
+                        <span data-i18n="testi2_sub">Shop Manager</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="faq container">
+            <h2 data-i18n="faq_title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h3 data-i18n="faq1_q">Are your rolls BPA-free?</h3>
+                    <p data-i18n="faq1_a">Yes, all our thermal paper rolls are 100% BPA-free and safe for use.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-i18n="faq2_q">How fast is the shipping?</h3>
+                    <p data-i18n="faq2_a">We offer express delivery within 1-2 business days across Sweden.</p>
+                </div>
+                <div class="faq-item">
+                    <h3 data-i18n="faq3_q">Can I cancel my subscription?</h3>
+                    <p data-i18n="faq3_a">Absolutely! You can cancel or pause your subscription at any time through your
+                        account.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="cta-section">
+            <div class="container">
+                <h2 data-i18n="contact_title">Ready to order?</h2>
+                <p data-i18n="contact_desc">We supply businesses of all sizes with reliable receipt paper.</p>
+                <a href="mailto:sales@kvittorullar.com" class="btn btn-primary" data-i18n="contact_sales_btn">Contact
+                    Sales</a>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer-placeholder" class="footer"></footer>
+
+    <div id="cart-placeholder"></div>
+    <div id="contact-modal-placeholder"></div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

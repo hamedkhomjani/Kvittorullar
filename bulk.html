@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="sv">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grossist & Bulkbeställningar - NordicRoll</title>
+    <meta name="description"
+        content="Grossist- och B2B-lösningar för kvittorullar. Få specialpriser och anpassat tryck för stora volymer.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- SEO & Social Media -->
+    <link rel="canonical" href="https://nordicroll.com/bulk.html">
+    <meta property="og:title" content="Bulk Orders - NordicRoll">
+    <meta property="og:description"
+        content="Get custom quotes for bulk thermal receipt roll orders. High volume, better pricing.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://nordicroll.com/assets/receipt_rolls_hero.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="author" content="NordicRoll">
+    <meta name="keywords" content="grossist kvittorullar, bulkorder, b2b, termopapper, kontorsmaterial">
+
+    <!-- Language Alternates for SEO -->
+    <link rel="alternate" hreflang="sv" href="https://nordicroll.com/bulk.html" />
+    <link rel="alternate" hreflang="en" href="https://nordicroll.com/bulk.html" />
+    <link rel="alternate" hreflang="x-default" href="https://nordicroll.com/bulk.html" />
+
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://nordicroll.com; connect-src 'self' https://formspree.io https://script.google.com https://script.googleusercontent.com; frame-ancestors 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    <script src="js/translations.js"></script>
+    <script src="js/components.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <header id="header-placeholder" class="header"></header>
+
+    <main id="main-content">
+        <!-- Bulk Hero Section -->
+        <section class="about-hero">
+            <div class="container">
+                <h1 data-i18n="bulk_hero_title">B2B & Wholesale Solutions</h1>
+                <p class="subtitle" data-i18n="bulk_hero_subtitle">Scalable supplies for enterprises, retail chains, and
+                    distributors.</p>
+                <div style="margin-top: 3rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn btn-primary" data-i18n="get_quote" style="padding: 1.2rem 2.5rem;">Request a
+                        Quote</button>
+                    <button id="view-process-btn" class="btn btn-secondary" data-i18n="bulk_process_title"
+                        style="padding: 1.2rem 2.5rem;"></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bulk Price Calculator -->
+        <section class="bulk-calculator container" style="margin-top: 4rem;">
+            <div class="calculator-card"
+                style="background: var(--card-bg); border-radius: 3rem; padding: 4rem; border: 1px solid var(--bg-alt); box-shadow: var(--shadow-lg);">
+                <div class="calc-header" style="text-align: center; margin-bottom: 4rem;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 1rem;" data-i18n="bulk_builder_title">Bulk Order
+                        Builder</h2>
+                    <p style="color: var(--text-light);" data-i18n="bulk_builder_desc">Mix and match sizes. Minimum
+                        total order is 20 boxes.</p>
+                </div>
+
+                <div class="calc-grid" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem;">
+                    <!-- Controls -->
+                    <div class="calc-controls">
+                        <div class="bulk-item-list" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                            <!-- Item 1 -->
+                            <div class="bulk-item-row" data-price="699"
+                                style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: var(--bg-alt); border-radius: 1.5rem;">
+                                <div>
+                                    <strong style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <span data-i18n="prod1_title">80 x 80 x 12 - 40M Standard POS</span>
+                                        <span class="info-trigger">ⓘ
+                                            <span class="tooltip-box" data-i18n="prod1_info">Ideal for restaurant
+                                                printers, Star Micronics, and Epson T88 series.</span>
+                                        </span>
+                                    </strong>
+                                    <small style="color: var(--text-light);"><span data-i18n="base_price">699 kr / box
+                                            base</span>: 699 kr</small>
+                                </div>
+                                <div class="stepper">
+                                    <button class="bulk-qty-btn minus">-</button>
+                                    <input type="number" class="bulk-qty-input" value="20" min="0">
+                                    <button class="bulk-qty-btn plus">+</button>
+                                </div>
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="bulk-item-row" data-price="599"
+                                style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: var(--bg-alt); border-radius: 1.5rem;">
+                                <div>
+                                    <strong style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <span data-i18n="prod2_title">80 x 45 x 12 - 16M Standard POS</span>
+                                        <span class="info-trigger">ⓘ
+                                            <span class="tooltip-box" data-i18n="prod2_info">Compact version for smaller
+                                                POS docks and kitchen printers.</span>
+                                        </span>
+                                    </strong>
+                                    <small style="color: var(--text-light);"><span data-i18n="base_price">Base
+                                            Price</span>: 599 kr</small>
+                                </div>
+                                <div class="stepper">
+                                    <button class="bulk-qty-btn minus">-</button>
+                                    <input type="number" class="bulk-qty-input" value="0" min="0">
+                                    <button class="bulk-qty-btn plus">+</button>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="bulk-item-row" data-price="549"
+                                style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: var(--bg-alt); border-radius: 1.5rem;">
+                                <div>
+                                    <strong style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <span data-i18n="prod4_title">57 x 58 x 12 - 40M</span>
+                                        <span class="info-trigger">ⓘ
+                                            <span class="tooltip-box" data-i18n="prod4_info">Standard size for desktop
+                                                card terminals and bank POS systems.</span>
+                                        </span>
+                                    </strong>
+                                    <small style="color: var(--text-light);"><span data-i18n="base_price">Base
+                                            Price</span>: 549 kr</small>
+                                </div>
+                                <div class="stepper">
+                                    <button class="bulk-qty-btn minus">-</button>
+                                    <input type="number" class="bulk-qty-input" value="0" min="0">
+                                    <button class="bulk-qty-btn plus">+</button>
+                                </div>
+                            </div>
+                            <!-- Item 4 -->
+                            <div class="bulk-item-row" data-price="349"
+                                style="display: flex; align-items: center; justify-content: space-between; padding: 1.5rem; background: var(--bg-alt); border-radius: 1.5rem;">
+                                <div>
+                                    <strong style="display: flex; align-items: center; gap: 0.5rem;">
+                                        <span data-i18n="prod5_title">58 x 36 x 12 - 14M Terminal</span>
+                                        <span class="info-trigger">ⓘ
+                                            <span class="tooltip-box" data-i18n="prod5_info">Perfect for mobile portable
+                                                terminals and handheld Bluetooth printers.</span>
+                                        </span>
+                                    </strong>
+                                    <small style="color: var(--text-light);"><span data-i18n="base_price">Base
+                                            Price</span>: 349 kr</small>
+                                </div>
+                                <div class="stepper">
+                                    <button class="bulk-qty-btn minus">-</button>
+                                    <input type="number" class="bulk-qty-input" value="0" min="0">
+                                    <button class="bulk-qty-btn plus">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Results -->
+                    <div class="calc-results"
+                        style="background: var(--bg-alt); border-radius: 2rem; padding: 3rem; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center;">
+                        <div id="savings-badge"
+                            style="position: absolute; top: 1.5rem; right: 1.5rem; background: #059669; color: white; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.8rem; font-weight: 700;">
+                            SAVE 5%</div>
+
+                        <div class="result-line" style="margin-bottom: 2rem;">
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;"
+                                data-i18n="total_quantity_label">Total
+                                Quantity</p>
+                            <h3 id="total-qty" style="font-size: 2rem;">20 boxes</h3>
+                        </div>
+
+                        <div class="result-line"
+                            style="margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid rgba(0,0,0,0.1);">
+                            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 0.5rem;"
+                                data-i18n="estimated_total_price">Estimated
+                                Total Price</p>
+                            <h3 id="total-price" style="font-size: 3rem; color: var(--primary-color);">13,281 kr</h3>
+                        </div>
+
+                        <div id="min-warning"
+                            style="display:none; color: #ef4444; font-weight: 600; margin-bottom: 1rem; font-size: 0.9rem;">
+                            ⚠️ Minimum total order is 20 boxes.
+                        </div>
+
+                        <div id="bulk-benefits"
+                            style="font-size: 0.9rem; color: var(--text-light); display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #059669;">✅</span> <span data-i18n="free_shipping_benefit">Free
+                                    Express Shipping</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #059669;">✅</span> <span
+                                    data-i18n="priority_account_benefit">Priority Account Manager</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                <span style="color: #059669;">✅</span> <span data-i18n="free_branding_benefit">Free
+                                    Back-Print Branding</span>
+                            </div>
+                        </div>
+
+                        <button id="download-pdf-btn" class="btn btn-secondary"
+                            style="margin-top: 2rem; width: 100%; border-color: var(--border-color); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            <span data-i18n="download_quote">Download Quote PDF</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Premium Benefits Grid -->
+        <section class="bulk-features container">
+            <div class="bulk-grid">
+                <div class="bulk-card">
+                    <div class="icon-box">📈</div>
+                    <h3 data-i18n="bulk_benefit1_title">Tiered Pricing</h3>
+                    <p data-i18n="bulk_benefit1_desc">The more you order, the less you pay. Custom pricing tables for
+                        high-volume clients.</p>
+                </div>
+                <div class="bulk-card">
+                    <div class="icon-box">🎨</div>
+                    <h3 data-i18n="bulk_benefit2_title">Custom Branding</h3>
+                    <p data-i18n="bulk_benefit2_desc">Print your logo or promotions on the back of every receipt roll.
+                    </p>
+                </div>
+                <div class="bulk-card">
+                    <div class="icon-box">🚚</div>
+                    <h3 data-i18n="bulk_benefit3_title">Priority Logistics</h3>
+                    <p data-i18n="bulk_benefit3_desc">Dedicated warehouse slots and fast-track shipping for our bulk
+                        partners.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Process Timeline -->
+        <section class="process-section container" style="padding: 100px 2rem;">
+            <div class="section-header" style="text-align: center; margin-bottom: 5rem;">
+                <h2 data-i18n="bulk_process_title" style="font-size: 2.5rem;">Our Bulk Order Process</h2>
+                <div
+                    style="width: 80px; height: 4px; background: var(--primary-color); margin: 1.5rem auto; border-radius: 2px;">
+                </div>
+            </div>
+
+            <div class="process-timeline">
+                <div class="timeline-steps">
+                    <div class="timeline-step">
+                        <div class="step-number">01</div>
+                        <h4 data-i18n="bulk_step1">Request Quote</h4>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-number">02</div>
+                        <h4 data-i18n="bulk_step2">Sample Review</h4>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-number">03</div>
+                        <h4 data-i18n="bulk_step3">Contract & Billing</h4>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-number">04</div>
+                        <h4 data-i18n="bulk_step4">Scheduled Delivery</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="container" style="margin-bottom: 100px;">
+            <div class="contact-card"
+                style="background: linear-gradient(135deg, var(--primary-color) 0%, #059669 100%); color: white; padding: 5rem 3rem; border-radius: 3rem; text-align: center; position: relative; overflow: hidden;">
+                <h2 style="font-size: 3rem; margin-bottom: 1.5rem; position: relative; z-index: 1;"
+                    data-i18n="bulk_cta_title">Ready to Scale Your
+                    Business?</h2>
+                <p style="font-size: 1.25rem; opacity: 0.9; margin-bottom: 3rem; max-width: 600px; margin-inline: auto; position: relative; z-index: 1;"
+                    data-i18n="bulk_cta_desc">
+                    Join hundreds of retailers across Scandinavia who trust NordicRoll for their volume supplies.</p>
+                <button class="btn btn-secondary" data-i18n="get_quote"
+                    style="background: white; color: var(--primary-color); border: none; padding: 1.5rem 3.5rem; font-size: 1.2rem; position: relative; z-index: 1;">Contact
+                    Sales Team</button>
+            </div>
+        </section>
+    </main>
+
+    <footer id="footer-placeholder" class="footer"></footer>
+
+    <div id="cart-placeholder"></div>
+    <div id="contact-modal-placeholder"></div>
+
+    <script src="js/script.js"></script>
+    <script src="js/bulk_logic.js"></script>
+</body>
+
+</html>
+```
