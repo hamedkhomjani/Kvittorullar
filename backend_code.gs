@@ -246,7 +246,32 @@ function createInvoiceFromRow() {
   `;
 
   var blob = Utilities.newBlob(htmlBody, 'text/html', 'Invoice-' + invoiceData.orderNum + '.html');
-  var pdf = DriveApp.createFile(blob.getAs('application/pdf')).setName('Invoice-' + invoiceData.orderNum + '.pdf');
+  var pdfBlob = blob.getAs('application/pdf');
   
-  SpreadsheetApp.getUi().alert("Invoice created successfully in your Google Drive!\\nName: " + pdf.getName());
+  // --- Folder Management ---
+  var rootFolderName = "NordicRoll_kunder_faktura";
+  var monthFolderName = Utilities.formatDate(new Date(), "GMT+1", "MMMM yyyy"); // e.g., "February 2026"
+  
+  var rootFolder, monthFolder;
+  
+  // 1. Get or Create Root Folder
+  var rootIter = DriveApp.getFoldersByName(rootFolderName);
+  if (rootIter.hasNext()) {
+    rootFolder = rootIter.next();
+  } else {
+    rootFolder = DriveApp.createFolder(rootFolderName);
+  }
+  
+  // 2. Get or Create Month Subfolder
+  var monthIter = rootFolder.getFoldersByName(monthFolderName);
+  if (monthIter.hasNext()) {
+    monthFolder = monthIter.next();
+  } else {
+    monthFolder = rootFolder.createFolder(monthFolderName);
+  }
+  
+  // 3. Create PDF in that specific folder
+  var pdf = monthFolder.createFile(pdfBlob).setName('Invoice-' + invoiceData.orderNum + '.pdf');
+  
+  SpreadsheetApp.getUi().alert("Faktura har skapats!\n\nMapp: " + rootFolderName + " > " + monthFolderName + "\nFil: " + pdf.getName());
 }
