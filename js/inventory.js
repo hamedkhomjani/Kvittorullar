@@ -117,38 +117,8 @@ function createProductCard(p) {
         </div>
     `;
 
-    // Wire up unit selector logic immediately for this card
-    const units = div.querySelectorAll('.unit-option');
-    const priceDisplay = div.querySelector('.price span');
-
-    units.forEach(u => {
-        u.addEventListener('click', () => {
-            units.forEach(btn => btn.classList.remove('active'));
-            u.classList.add('active');
-
-            const unit = u.dataset.unit;
-            if (unit === 'box') {
-                priceDisplay.textContent = p.price_box;
-            } else {
-                priceDisplay.textContent = p.price_roll;
-            }
-        });
-    });
-
-    // Wire up quantity
-    const minus = div.querySelector('.minus');
-    const plus = div.querySelector('.plus');
-    const input = div.querySelector('.qty-input');
-
-    minus.addEventListener('click', () => {
-        let val = parseInt(input.value) || 1;
-        if (val > 1) input.value = val - 1;
-    });
-
-    plus.addEventListener('click', () => {
-        let val = parseInt(input.value) || 1;
-        input.value = val + 1;
-    });
+    // Event listeners are handled via delegation in script.js to avoid double-firing
+    // for dynamically loaded cards. (See "Dynamic Product Event Delegation" section)
 
     return div;
 }
