@@ -1,4 +1,4 @@
-const INVENTORY_URL = "https://script.google.com/macros/s/AKfycbyGoX_zpfGc8rG0G-Ik7Qm_rX0s8bQd4zefxg2h9IUSzXwcFNAdJazlp_mxqJNkc7cE/exec";
+const INVENTORY_URL = "https://script.google.com/macros/s/AKfycbzY76x2MWrVCngVagvfJxl4THpMwTRaIltNbfZTbnby4ca-9jP247OKAGvrD4Hnl5fB/exec";
 const CACHE_KEY = 'nordic_inventory_cache';
 const POLL_INTERVAL = 60000; // Check for updates every 60 seconds
 
@@ -57,6 +57,11 @@ async function loadInventory(isPolling = false) {
     }
 }
 
+const t = (key) => {
+    const lang = localStorage.getItem('preferredLang') || 'en';
+    return (typeof translations !== 'undefined' && translations[lang] && translations[lang][key]) ? translations[lang][key] : key;
+};
+
 function renderProducts() {
     const grid = document.getElementById('dynamic-product-grid');
     if (!grid || !fetchedProducts.length) return;
@@ -65,12 +70,6 @@ function renderProducts() {
     fetchedProducts.forEach(prod => {
         grid.appendChild(createProductCard(prod));
     });
-
-    // Re-apply translations for static UI elements within the new cards
-    const currentLang = localStorage.getItem('preferredLang') || 'en';
-    if (typeof window.applyTranslations === 'function') {
-        window.applyTranslations(currentLang);
-    }
 }
 
 // Re-render products when language changes
@@ -105,8 +104,8 @@ function createProductCard(p) {
                 </span>
             </h3>
             <div class="unit-selector">
-                <div class="unit-option active" data-unit="box" data-i18n="box">Box</div>
-                <div class="unit-option" data-unit="roll" data-i18n="roll">Roll</div>
+                <div class="unit-option active" data-unit="box">${t('box') || 'Box'}</div>
+                <div class="unit-option" data-unit="roll">${t('roll') || 'Roll'}</div>
             </div>
             <p class="price"><span>${p.price_box}</span> kr</p>
             <div class="quantity-selector">
@@ -114,7 +113,7 @@ function createProductCard(p) {
                 <input type="number" class="qty-input" value="1" min="1">
                 <button class="qty-btn plus">+</button>
             </div>
-            <button class="btn btn-secondary" data-i18n="add_to_cart">Add to Cart</button>
+            <button class="btn btn-secondary" data-i18n="add_to_cart">${t('add_to_cart') || 'Add to Cart'}</button>
         </div>
     `;
 

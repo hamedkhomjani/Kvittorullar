@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('FormSource', 'Checkout');
 
             // --- GOOGLE SHEETS SETTINGS ---
-            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzUg5waQQOXnZico1AY1rcExtglHJxc5Tq9jhIVzoKkIkj-LvFAtohCC5rQdGEP69-mnA/exec';
+            const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwIIKpsHGvqa3f3RxWcB9_OAYEpgIkx8jbnq63X5cOneof-7kos0nzUR5iOonsYirYHIw/exec';
             const API_URL = GOOGLE_SCRIPT_URL;
 
             try {

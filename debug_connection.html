@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dual Connection Debugger</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .log-box {
+            background: #f4f4f4;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            height: 300px;
+            overflow-y: scroll;
+            margin-top: 1rem;
+            white-space: pre-wrap;
+        }
+
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        input {
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Dual Connection Debugger</h1>
+
+    <h2>1. Products API (GET)</h2>
+    <label>Product Script URL:</label>
+    <input type="text" id="productUrl"
+        value="https://script.google.com/macros/s/AKfycbzY76x2MWrVCngVagvfJxl4THpMwTRaIltNbfZTbnby4ca-9jP247OKAGvrD4Hnl5fB/exec">
+    <button onclick="testProducts()">Test Products Load</button>
+
+    <h2>2. Orders API (POST)</h2>
+    <label>Order Script URL:</label>
+    <input type="text" id="orderUrl"
+        value="https://script.google.com/macros/s/AKfycbwIIKpsHGvqa3f3RxWcB9_OAYEpgIkx8jbnq63X5cOneof-7kos0nzUR5iOonsYirYHIw/exec">
+    <button onclick="testOrder()">Test Order Submission</button>
+
+    <div id="statusArea"></div>
+    <div class="log-box" id="consoleLog"></div>
+
+    <script>
+        function log(msg) {
+            const box = document.getElementById('consoleLog');
+            const time = new Date().toLocaleTimeString();
+            box.innerText += `[${time}] ${msg}\n`;
+            box.scrollTop = box.scrollHeight;
+            console.log(msg);
+        }
+
+        function setStatus(msg, type) {
+            const el = document.getElementById('statusArea');
+            el.innerHTML = `<div class="status ${type}">${msg}</div>`;
+        }
+
+        async function testProducts() {
+            const url = document.getElementById('productUrl').value;
+            log(`Testing GET request to Products API...`);
+            setStatus("Testing Products...", "normal");
+
+            try {
+                const response = await fetch(url);
+                log(`Response Status: ${response.status}`);
+
+                if (response.ok) {
+                    const data = await response.json();
+
+                    if (data.error) {
+                        log(`Error from script: ${data.error}`);
+                        setStatus("Script Error: " + data.error, "error");
+                    } else if (Array.isArray(data)) {
+                        log(`Success! Loaded ${data.length} products.`);
+                        log(`First item: ${JSON.stringify(data[0])}`);
+                        setStatus("Products Loaded Successfully!", "success");
+                    } else {
+                        log(`Data received but unexpected format: ${JSON.stringify(data).substring(0, 100)}`);
+                        setStatus("Format Warning (Check Logs)", "error");
+                    }
+                } else {
+                    log("GET failed.");
+                    setStatus("GET Failed (Non-200 status)", "error");
+                }
+            } catch (e) {
+                log(`GET Error: ${e.message}`);
+                setStatus("GET Request Failed (Check Network/CORS)", "error");
+            }
+        }
+
+        async function testOrder() {
+            const url = document.getElementById('orderUrl').value;
+            log(`Testing POST request to Orders API...`);
+            setStatus("Testing Order Submission...", "normal");
+
+            const formData = new FormData();
+            formData.append('Order Number', 'DEBUG-DUAL-' + Math.floor(Math.random() * 1000));
+            formData.append('Order Details', 'Dual Connection Test');
+            formData.append('Total Amount', '100 kr');
+            formData.append('Status', 'Debug');
+            formData.append('FormSource', 'Debugger v2');
+            formData.append('payment', 'TestCard');
+
+            try {
+                // Using no-cors because standard fetch to Google Script triggers CORS blocking on POST, 
+                // but the request usually succeeds in background.
+                await fetch(url, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                log("POST request sent (mode: no-cors).");
+                log("CHECK YOUR 'Available Orders' SHEET NOW.");
+                log("Look for a new tab with the current Month name.");
+                setStatus("Order Sent. Check Google Sheet tabs.", "success");
+
+            } catch (e) {
+                log(`POST Error: ${e.message}`);
+                setStatus("POST Request Failed", "error");
+            }
+        }
+    </script>
+</body>
+
+</html>

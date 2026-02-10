@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const _config = {
         _p1: 'https://script.google.com/macros/s/',
-        _p2: 'AKfycbzUg5waQQOXnZico1AY1rcExtglHJxc5Tq9jhIVzoKkIkj-LvFAtohCC5rQdGEP69-mnA',
+        _p2: 'AKfycbwIIKpsHGvqa3f3RxWcB9_OAYEpgIkx8jbnq63X5cOneof-7kos0nzUR5iOonsYirYHIw',
         _p3: '/exec',
         getEndpoint: function () {
             return this._p1 + this._p2 + this._p3;

@@ -3,7 +3,7 @@
  * Handles calculations, tiered pricing, and PDF generation.
  */
 
-const BULK_INVENTORY_URL = "https://script.google.com/macros/s/AKfycbyGoX_zpfGc8rG0G-Ik7Qm_rX0s8bQd4zefxg2h9IUSzXwcFNAdJazlp_mxqJNkc7cE/exec";
+const BULK_INVENTORY_URL = "https://script.google.com/macros/s/AKfycbzY76x2MWrVCngVagvfJxl4THpMwTRaIltNbfZTbnby4ca-9jP247OKAGvrD4Hnl5fB/exec";
 const CACHE_KEY = 'nordic_inventory_cache';
 const POLL_INTERVAL = 60000;
 
