@@ -113,9 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const submitBtn = leadForm.querySelector('.modal-submit-btn');
-            const originalText = submitBtn.textContent;
-
-            submitBtn.textContent = '...';
+            submitBtn.classList.add('btn-loading');
             submitBtn.disabled = true;
 
             const formData = new FormData(leadForm);
@@ -162,7 +160,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Security/Network error:', err);
                 alert('Connection error. Please try again later.');
             } finally {
-                submitBtn.textContent = originalText;
+                submitBtn.classList.remove('btn-loading');
                 submitBtn.disabled = false;
             }
         });

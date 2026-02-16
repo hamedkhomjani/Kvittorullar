@@ -19,8 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const submitBtn = document.getElementById('submit-order-btn');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = '...';
+            submitBtn.classList.add('btn-loading');
             submitBtn.disabled = true;
 
             const formData = new FormData(checkoutForm);
@@ -92,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Checkout error:', err);
                 alert('Connection error. Please check your internet and try again.');
             } finally {
-                submitBtn.textContent = originalText;
+                submitBtn.classList.remove('btn-loading');
                 submitBtn.disabled = false;
             }
         });

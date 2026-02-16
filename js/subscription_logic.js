@@ -268,8 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
 
             const submitBtn = subForm.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = '...';
+            submitBtn.classList.add('btn-loading');
             submitBtn.disabled = true;
 
             const formData = new FormData(subForm);
@@ -323,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Subscription submission error:", err);
                 alert('Error submitting subscription. Please try again.');
             } finally {
-                submitBtn.textContent = originalText;
+                submitBtn.classList.remove('btn-loading');
                 submitBtn.disabled = false;
             }
         });
