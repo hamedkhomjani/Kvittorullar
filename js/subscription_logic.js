@@ -188,7 +188,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         itemRows.forEach(row => {
             const qtyInput = row.querySelector('.step-input');
-            const qty = parseInt(qtyInput.value) || 0;
+            const qty = safeParseInt(qtyInput.value);
             const basePrice = parseInt(row.dataset.basePrice);
 
             const activeToggle = row.querySelector('.toggle-btn.active');
@@ -323,10 +323,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Error submitting subscription. Please try again.');
             } finally {
                 submitBtn.classList.remove('btn-loading');
-                submitBtn.disabled = false;
+                updateSummary(); // Re-check min-limit and re-enable/disable correctly
             }
         });
     }
+
+    // --- Price Check Helpers --- 
+    // Ensure negative values are handled
+    const safeParseInt = (val) => Math.max(0, parseInt(val) || 0);
 
     // Validation ... (Existing validation logic)
     const zipInput = document.getElementById('sub-zip');

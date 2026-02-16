@@ -407,6 +407,10 @@ body {
     letter-spacing: 0.2px;
 }
 
+.w-full {
+    width: 100% !important;
+}
+
 .btn-primary {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
     color: white;
@@ -3241,6 +3245,7 @@ input.qty-input {
 
 .btn-loading * {
     opacity: 0 !important;
+    visibility: hidden !important;
 }
 
 .btn-loading::before {

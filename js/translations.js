@@ -854,7 +854,7 @@ const translations = {
         free_shipping_hint: "Kostenloser Versand für Bestellungen über 300 kr",
         spend_more: "Kaufen Sie für {amount} kr mehr für kostenlosen Versand",
         free_shipping_qualified: "Sie haben kostenlosen Versand! 🎉",
-        min_sub_limit: "Mindest-Abo-Betrag ist 500 kr/Monat",
+        min_sub_limit: "Mindest-Abo-Betrag ist 500 kr pro Lieferung",
         sub_build_title: "Ihr individuelles Abonnement",
         sub_build_desc: "Passen Sie Ihren Lieferplan perfekt an Ihre geschäftlichen Anforderungen an.",
         step_configure_items: "Konfigurieren Sie Ihre Kartons",
