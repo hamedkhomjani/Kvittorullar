@@ -53,7 +53,6 @@ body {
     color: var(--text-color);
     background-color: var(--bg-color);
     line-height: 1.6;
-    overflow-x: hidden;
     width: 100%;
 }
 
@@ -2312,10 +2311,7 @@ body {
     border-top: 4px solid var(--primary-color);
 }
 
-.sticky-summary {
-    position: sticky;
-    top: 120px;
-}
+/* Removed duplicate definition to avoid conflicts */
 
 .checkout-items-list {
     margin-bottom: 1.5rem;
@@ -2381,7 +2377,9 @@ body {
     }
 
     .sticky-summary {
-        position: static;
+        position: sticky;
+        top: 100px;
+        z-index: 100;
     }
 }
 
@@ -2535,7 +2533,9 @@ input.qty-input {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     gap: 3rem;
-    align-items: start;
+    align-items: stretch;
+    position: relative;
+    overflow: visible;
 }
 
 .config-step {
@@ -2662,14 +2662,25 @@ input.qty-input {
     color: var(--primary-color);
 }
 
+.sidebar-container {
+    height: 100%;
+    position: relative;
+    overflow: visible;
+}
+
 .sticky-summary {
+    position: -webkit-sticky;
     position: sticky;
-    top: 120px;
+    top: 110px;
     background: var(--card-bg);
     border-radius: 2rem;
     padding: 2.5rem;
     border: 1px solid var(--bg-alt);
     box-shadow: var(--shadow-soft);
+    z-index: 100;
+    margin-bottom: 2rem;
+    height: fit-content;
+    align-self: start;
 }
 
 .savings-tag {
@@ -3135,11 +3146,14 @@ input.qty-input {
     }
 
     .sticky-summary {
-        position: relative !important;
-        top: 0 !important;
-        margin-top: 1rem !important;
-        z-index: 1;
-        /* Ensure it doesn't overlap weirdly */
+        position: sticky !important;
+        bottom: 0 !important;
+        top: auto !important;
+        margin-top: 2rem !important;
+        z-index: 1000;
+        border-radius: 2rem 2rem 0 0 !important;
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1) !important;
+        padding: 1.5rem !important;
     }
 
     /* 11. Bulk Page Mobile Fixes */
