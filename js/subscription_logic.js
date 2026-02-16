@@ -232,7 +232,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Minimum Price Check
         if (subSubmitBtn) {
             // Logic: Must spend at least 500kr/month on average
-            if (monthlyAverage < 500 && totalSubtotal > 0) {
+            if (finalTotal < 500 && totalSubtotal > 0) {
                 subSubmitBtn.disabled = true;
                 subSubmitBtn.style.opacity = '0.5';
                 subSubmitBtn.style.cursor = 'not-allowed';
