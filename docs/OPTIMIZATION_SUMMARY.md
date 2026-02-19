@@ -1,191 +1,191 @@
-# ✅ بهینه‌سازی‌های انجام شده
+# ✅ Optimization Summary
 
-**تاریخ:** 2026-02-05  
-**وضعیت:** در حال انجام
-
----
-
-## 🎯 هدف
-
-بهبود سرعت و قدرت وب‌سایت NordicRoll از **8.4/10** به **9.5/10**
+**Date:** 2026-02-05  
+**Status:** In Progress
 
 ---
 
-## ✅ بهینه‌سازی‌های انجام شده
+## 🎯 Goal
 
-### 1. ✅ بهینه‌سازی بارگذاری تصاویر
-
-#### تغییرات:
-- ✅ اضافه شدن `fetchpriority="high"` به تصویر hero
-- ✅ اضافه شدن `decoding="async"` برای بارگذاری غیرهمزمان
-
-#### فایل‌های تغییر یافته:
-- `index.html` (خط 108)
-
-#### تاثیر:
-- بهبود First Contentful Paint (FCP)
-- کاهش Blocking Time
+Improve the speed and performance of the NordicRoll website from **8.4/10** to **9.5/10**
 
 ---
 
-### 2. ✅ بهینه‌سازی فونت‌ها
+## ✅ Completed Optimizations
 
-#### تغییرات:
-- ✅ اضافه شدن `display=swap` به Google Fonts
-- ✅ اضافه شدن `dns-prefetch` برای سرویس‌های خارجی
+### 1. ✅ Image Loading Optimization
 
-#### فایل‌های تغییر یافته:
-- `index.html` (خطوط 11-15)
+#### Changes:
+- ✅ Added `fetchpriority="high"` to the hero image
+- ✅ Added `decoding="async"` for asynchronous loading
 
-#### تاثیر:
-- جلوگیری از FOIT (Flash of Invisible Text)
-- کاهش زمان اتصال به سرورهای خارجی
-- بهبود **~200ms** در زمان بارگذاری
+#### Modified Files:
+- `index.html` (line 108)
+
+#### Impact:
+- Improved First Contentful Paint (FCP)
+- Reduced Blocking Time
 
 ---
 
-### 3. ✅ سیستم بارگذاری پویای ترجمه‌ها
+### 2. ✅ Font Optimization
 
-#### تغییرات:
-- ✅ ایجاد `translations-loader.js`
-- ✅ بارگذاری فقط زبان مورد نیاز (به جای همه زبان‌ها)
+#### Changes:
+- ✅ Added `display=swap` to Google Fonts
+- ✅ Added `dns-prefetch` for external services
 
-#### فایل‌های جدید:
+#### Modified Files:
+- `index.html` (lines 11-15)
+
+#### Impact:
+- Prevented FOIT (Flash of Invisible Text)
+- Reduced connection time to external servers
+- Improved load time by **~200ms**
+
+---
+
+### 3. ✅ Dynamic Translation Loading System
+
+#### Changes:
+- ✅ Created `translations-loader.js`
+- ✅ Loading only the required language (instead of all languages)
+
+#### New Files:
 - `translations-loader.js`
 
-#### تاثیر:
-- کاهش حجم اولیه: **-65 KB** (از 80 KB به 15 KB)
-- بهبود زمان بارگذاری: **~500ms**
+#### Impact:
+- Reduced initial size: **-65 KB** (from 80 KB to 15 KB)
+- Improved load time: **~500ms**
 
 ---
 
 ### 4. ✅ Resource Hints
 
-#### تغییرات:
-- ✅ `dns-prefetch` برای Google Sheets API
-- ✅ `dns-prefetch` برای Formspree
+#### Changes:
+- ✅ `dns-prefetch` for Google Sheets API
+- ✅ `dns-prefetch` for Formspree
 
-#### فایل‌های تغییر یافته:
-- `index.html` (خطوط 13-14)
+#### Modified Files:
+- `index.html` (lines 13-14)
 
-#### تاثیر:
-- کاهش زمان اتصال به API ها
-- بهبود **~100-150ms** در submit فرم‌ها
+#### Impact:
+- Reduced connection time to APIs
+- Improved form submission by **~100-150ms**
 
 ---
 
-## 🔄 بهینه‌سازی‌های در انتظار انجام
+## 🔄 Pending Optimizations
 
-### 1. ⏳ بهینه‌سازی تصاویر (مهم‌ترین!)
+### 1. ⏳ Image Optimization (Most Important!)
 
-**وضعیت:** نیاز به اقدام دستی کاربر
+**Status:** Requires manual user action
 
-#### کارهای لازم:
-1. تبدیل تصاویر PNG به WebP:
+#### Tasks:
+1. Convert PNG images to WebP:
    - `receipt_rolls_hero.png` (505 KB) → WebP (~80 KB)
    - `pos_roll_standard.png` (438 KB) → WebP (~70 KB)
    - `credit_card_roll.png` (417 KB) → WebP (~65 KB)
 
-2. به‌روزرسانی HTML برای استفاده از `<picture>` tag
+2. Update HTML to use `<picture>` tag
 
-#### ابزارهای پیشنهادی:
-- 🔗 [Squoosh](https://squoosh.app) - ساده‌ترین
-- 🔗 [CloudConvert](https://cloudconvert.com/png-to-webp) - دسته‌جمعی
-- 🔗 [TinyPNG](https://tinypng.com) - فشرده‌سازی
+#### Recommended Tools:
+- 🔗 [Squoosh](https://squoosh.app) - Simplest
+- 🔗 [CloudConvert](https://cloudconvert.com/png-to-webp) - Batch
+- 🔗 [TinyPNG](https://tinypng.com) - Compression
 
-#### تاثیر پیش‌بینی شده:
-- کاهش حجم: **-1.14 MB** (-84%)
-- بهبود زمان بارگذاری: **-3.3 ثانیه** (-73%)
-- بهبود PageSpeed Score: **+25-30 امتیاز**
+#### Predicted Impact:
+- Size reduction: **-1.14 MB** (-84%)
+- Load time improvement: **-3.3 seconds** (-73%)
+- PageSpeed Score improvement: **+25-30 points**
 
-📖 **راهنما:** فایل `IMAGE_OPTIMIZATION_GUIDE.md` رو ببینید
+📖 **Guide:** See the `IMAGE_OPTIMIZATION_GUIDE.md` file
 
 ---
 
 ### 2. ⏳ Minification
 
-**وضعیت:** نیاز به ابزار build
+**Status:** Requires build tool
 
-#### کارهای لازم:
-- Minify کردن `style.css` (61.79 KB → ~38 KB)
-- Minify کردن `script.js` (31.83 KB → ~20 KB)
+#### Tasks:
+- Minify `style.css` (61.79 KB → ~38 KB)
+- Minify `script.js` (31.83 KB → ~20 KB)
 
-#### ابزارهای پیشنهادی:
+#### Recommended Tools:
 - CSS: https://cssminifier.com
 - JS: https://javascript-minifier.com
 
-#### تاثیر پیش‌بینی شده:
-- کاهش حجم: **-35 KB**
-- بهبود زمان بارگذاری: **~300ms**
+#### Predicted Impact:
+- Size reduction: **-35 KB**
+- Load time improvement: **~300ms**
 
 ---
 
-### 3. ⏳ Lazy Loading برای تمام تصاویر
+### 3. ⏳ Lazy Loading for All Images
 
-**وضعیت:** نیاز به تغییرات HTML
+**Status:** Requires HTML changes
 
-#### کارهای لازم:
-- اضافه کردن `loading="lazy"` به تمام تصاویر (به جز hero)
-- بررسی `bulk.html`, `subscription.html`, `checkout.html`
+#### Tasks:
+- Add `loading="lazy"` to all images (except hero)
+- Check `bulk.html`, `subscription.html`, `checkout.html`
 
-#### تاثیر پیش‌بینی شده:
-- کاهش بارگذاری اولیه: **~40%**
-- بهبود Time to Interactive: **~1 ثانیه**
+#### Predicted Impact:
+- Initial load reduction: **~40%**
+- Time to Interactive improvement: **~1 second**
 
 ---
 
-## 📊 نتایج فعلی
+## 📊 Current Results
 
-### قبل از بهینه‌سازی:
-- حجم کل صفحه: **~1.6 MB**
-- زمان بارگذاری (3G): **4.5 ثانیه**
+### Before Optimization:
+- Total page size: **~1.6 MB**
+- Load time (3G): **4.5 seconds**
 - PageSpeed Score: **~65**
 
-### بعد از بهینه‌سازی‌های انجام شده:
-- حجم کل صفحه: **~1.53 MB** (-70 KB)
-- زمان بارگذاری (3G): **~4.0 ثانیه** (-0.5s)
+### After Completed Optimizations:
+- Total page size: **~1.53 MB** (-70 KB)
+- Load time (3G): **~4.0 seconds** (-0.5s)
 - PageSpeed Score: **~70** (+5)
 
-### هدف نهایی (بعد از تمام بهینه‌سازی‌ها):
-- حجم کل صفحه: **~350 KB** (-78%)
-- زمان بارگذاری (3G): **~1.2 ثانیه** (-73%)
+### Final Goal (After all optimizations):
+- Total page size: **~350 KB** (-78%)
+- Load time (3G): **~1.2 seconds** (-73%)
 - PageSpeed Score: **~95** (+30)
 
 ---
 
-## 🎯 اولویت‌های بعدی
+## 🎯 Next Priorities
 
-### فوری (تاثیر بالا):
-1. 🔴 **بهینه‌سازی تصاویر** (تاثیر 80%)
-   - راهنما: `IMAGE_OPTIMIZATION_GUIDE.md`
+### Immediate (High Impact):
+1. 🔴 **Image Optimization** (80% impact)
+   - Guide: `IMAGE_OPTIMIZATION_GUIDE.md`
 
-### متوسط:
-2. 🟡 **Minification** (تاثیر 10%)
-3. 🟡 **Lazy Loading** (تاثیر 5%)
+### Medium:
+2. 🟡 **Minification** (10% impact)
+3. 🟡 **Lazy Loading** (5% impact)
 
-### پایین:
-4. 🟢 **Critical CSS** (تاثیر 3%)
-5. 🟢 **Preload فونت‌ها** (تاثیر 2%)
-
----
-
-## 📝 یادداشت‌ها
-
-### چیزهایی که خوب کار کردن:
-- ✅ Resource Hints خیلی موثر بودن
-- ✅ Font display swap تاثیر خوبی داشت
-- ✅ Async decoding برای تصاویر عالی بود
-
-### چیزهایی که نیاز به بهبود دارن:
-- ⚠️ تصاویر هنوز خیلی سنگین هستن (مهم‌ترین مشکل!)
-- ⚠️ فایل ترجمه باید به سیستم جدید migrate بشه
-- ⚠️ CSS و JS باید minify بشن
+### Low:
+4. 🟢 **Critical CSS** (3% impact)
+5. 🟢 **Preload Fonts** (2% impact)
 
 ---
 
-## 🛠️ دستورات مفید
+## 📝 Notes
 
-### تست سرعت:
+### What worked well:
+- ✅ Resource Hints were very effective
+- ✅ Font display swap had a good impact
+- ✅ Async decoding for images was great
+
+### What needs improvement:
+- ⚠️ Images are still very heavy (Most important issue!)
+- ⚠️ Translation file needs to be migrated to the new system
+- ⚠️ CSS and JS should be minified
+
+---
+
+## 🛠️ Useful Commands
+
+### Speed Test:
 ```bash
 # Google PageSpeed Insights
 https://pagespeed.web.dev/?url=https://nordicroll.com
@@ -194,12 +194,13 @@ https://pagespeed.web.dev/?url=https://nordicroll.com
 https://gtmetrix.com
 ```
 
-### بررسی حجم فایل‌ها:
+### Check file sizes:
 ```powershell
+# PowerShell command
 Get-ChildItem -File | Select-Object Name, @{Name="Size(KB)";Expression={[math]::Round($_.Length/1KB,2)}} | Sort-Object "Size(KB)" -Descending
 ```
 
 ---
 
-**آخرین به‌روزرسانی:** 2026-02-05 11:37  
-**وضعیت کلی:** ✅ در حال پیشرفت - نیاز به بهینه‌سازی تصاویر
+**Last Update:** 2026-02-05 11:37  
+**Overall Status:** ✅ In Progress - Image optimization needed

@@ -1,43 +1,43 @@
 # 🚀 NordicRoll Launch Checklist
 
-این فایل شامل تمامی نکاتی است که برای تبدیل این قالب به یک وب‌سایت تجاری و زنده (Live) باید انجام دهید.
+This file contains all the points you need to follow to turn this template into a commercial and live website.
 
 ---
 
-### ۱. اتصال فرم‌ها به سیستم مدیریت (Backend)
-در حال حاضر فرم‌ها فقط ظاهر گرافیکی دارند. برای دریافت سفارش‌ها:
-- [ ] انتخاب یک سرویس هندلینگ فرم (پیشنهاد: [Formspree](https://formspree.io/) یا [Netlify Forms](https://www.netlify.com/products/forms/)).
-- [ ] تغییر اسکریپت در فایل `script.js` و `checkout.html` برای ارسال داده‌ها به آدرس Endpoint.
-- [ ] تست ارسال یک سفارش نمونه و دریافت آن در ایمیل مدیریت.
+### 1. Connecting Forms to Management System (Backend)
+Currently, forms only have a graphical appearance. To receive orders:
+- [ ] Choose a form handling service (Recommendation: [Formspree](https://formspree.io/) or [Netlify Forms](https://www.netlify.com/products/forms/)).
+- [ ] Change the script in `script.js` and `checkout.html` to send data to the Endpoint address.
+- [ ] Test sending a sample order and receiving it in the management email.
 
-### ۲. سیستم پرداخت (Payments)
-- [ ] **Swish:** دریافت شماره Swish تجاری و قرار دادن آن در صفحه Checkout یا اتصال به API رسمی Swish.
-- [ ] **درگاه بانکی:** در صورت نیاز به پرداخت مستقیم، ایجاد حساب در Stripe یا Klarna و جایگزینی کدهای شبیه‌سازی شده با API واقعی.
+### 2. Payment System (Payments)
+- [ ] **Swish:** Obtain a commercial Swish number and place it on the Checkout page or connect to the official Swish API.
+- [ ] **Bank Gateway:** If direct payment is needed, create an account on Stripe or Klarna and replace the simulated codes with the real API.
 
-### ۳. محتوا و قیمت‌گذاری نهایی
-- [ ] بررسی مجدد تمامی قیمت‌ها در فایل `translations.js` (بخش محصولات و اشتراک‌ها).
-- [ ] تایید نهایی متراژ رول‌ها (مثلاً ۴۰M یا ۱۶M) با موجودی انبار.
-- [ ] بررسی شماره تماس و ایمیل رسمی در فوتر و صفحه تماس.
+### 3. Final Content and Pricing
+- [ ] Re-check all prices in the `translations.js` file (Products and Subscriptions sections).
+- [ ] Final confirmation of roll lengths (e.g., 40M or 16M) with inventory.
+- [ ] Check official contact number and email in the footer and contact page.
 
-### ۴. متون حقوقی و GDPR (سوئد)
-- [ ] ویرایش صفحه `privacy.html` با اطلاعات واقعی شرکت (نام ثبت شده، شماره ثبت مالیاتی).
-- [ ] اطمینان از اینکه متن قوانین و مقررات (Terms of Service) با قوانین تجارت در سوئد مطابقت دارد.
+### 4. Legal Texts and GDPR (Sweden)
+- [ ] Edit the `privacy.html` page with real company information (registered name, tax registration number).
+- [ ] Ensure that the Terms of Service comply with business laws in Sweden.
 
-### ۵. تنظیمات فنی و سئو
-- [ ] ** Favicon:** طراحی و قرار دادن آیکون کوچک برای تب مرورگر.
-- [ ] **سئو:** بررسی تگ‌های Meta و Description در تمام صفحات (Index, Bulk, Checkout).
-- [ ] **سرعت:** بهینه‌سازی حجم تصاویر (تبدیل به WebP) برای لود سریع‌تر.
+### 5. Technical Settings and SEO
+- [ ] **Favicon:** Design and place a small icon for the browser tab.
+- [ ] **SEO:** Check Meta and Description tags on all pages (Index, Bulk, Checkout).
+- [ ] **Speed:** Optimize image sizes (convert to WebP) for faster loading.
 
-### ۶. هاستینگ و دامنه
-- [ ] خرید دامنه `nordicroll.se` یا `nordicroll.com`.
-- [ ] انتخاب هاستینگ مناسب (Netlify و Vercel برای این نوع سایت‌ها عالی و رایگان/ارزان هستند).
-- [ ] تنظیم پروتکل امنیتی SSL (https) که برای اعتماد مشتری و سئو حیاتی است.
+### 6. Hosting and Domain
+- [ ] Purchase domain `nordicroll.se` or `nordicroll.com`.
+- [ ] Choose suitable hosting (Netlify and Vercel are great and free/cheap for these types of sites).
+- [ ] Set up SSL (HTTPS) security protocol, which is vital for customer trust and SEO.
 
-### ۷. تست نهایی (Quality Assurance)
-- [ ] تست کامل «چرخه خرید» از انتخاب محصول تا تایید نهایی در موبایل.
-- [ ] بررسی نمایش صحیح فونت‌ها و جهت متن (RTL) در زبان فارسی.
-- [ ] اطمینان از کارکرد صحیح دکمه «تغییر زبان» در تمام صفحات.
+### 7. Final Test (Quality Assurance)
+- [ ] Full test of the "purchase cycle" from product selection to final confirmation on mobile.
+- [ ] Check the correct display of fonts and text direction (RTL) in Persian.
+- [ ] Ensure the "Change Language" button works correctly on all pages.
 
 ---
-📅 **تاریخ ایجاد:** ۲۰۲۶-۰۲-۰۲
-🚩 **وضعیت پروژه:** آماده برای اتصال به درگاه و هاست.
+📅 **Date Created:** 2026-02-02
+🚩 **Project Status:** Ready for gateway and hosting connection.

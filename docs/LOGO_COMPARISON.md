@@ -1,75 +1,75 @@
-# 🚀 لوگوهای فوتوریستیک NordicRoll
+# 🚀 NordicRoll Futuristic Logos
 
-## ✨ ویژگی‌های طراحی فوتوریستیک:
+## ✨ Futuristic Design Features:
 
-### 🎨 المان‌های بصری:
-- **هگزاگون 3D** - شکل هندسی مدرن و تکنولوژیک
-- **گرادیانت پیشرفته** - از آبی به بنفش با افکت درخشان
-- **افکت Glow** - نور درخشان دور المان‌ها
-- **خطوط تکنولوژیک** - شبکه و خطوط هندسی
-- **نقاط نورانی** - جزئیات دیجیتال
-- **فونت Orbitron** - فونت فوتوریستیک و تکنولوژیک
+### 🎨 Visual Elements:
+- **3D Hexagon** - Modern and technological geometric shape
+- **Advanced Gradient** - From blue to purple with a glowing effect
+- **Glow Effect** - Radiant light around elements
+- **Technological Lines** - Grid and geometric lines
+- **Luminous Points** - Digital details
+- **Orbitron Font** - Futuristic and technological font
 
-### 📁 فایل‌های جدید:
+### 📁 New Files:
 
-1. **`logo-futuristic.svg`** - نسخه اصلی فوتوریستیک
-2. **`logo-futuristic-white.svg`** - نسخه سفید برای پس‌زمینه تیره
-3. **`logo-futuristic-icon.svg`** - آیکون مربعی فوتوریستیک
+1. **`logo-futuristic.svg`** - Main futuristic version
+2. **`logo-futuristic-white.svg`** - White version for dark backgrounds
+3. **`logo-futuristic-icon.svg`** - Square futuristic icon
 
 ---
 
-## 🆚 مقایسه دو استایل:
+## 🆚 Comparison of Two Styles:
 
-| ویژگی | لوگوی ساده | لوگوی فوتوریستیک |
+| Feature | Simple Logo | Futuristic Logo |
 |-------|-----------|------------------|
-| **استایل** | مینیمال، کلاسیک | پیچیده، مدرن |
-| **حس برند** | حرفه‌ای، جدی | نوآورانه، تکنولوژیک |
-| **مناسب برای** | B2B سنتی | استارتاپ‌ها، تک |
-| **پیچیدگی** | ⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **خوانایی کوچک** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
-| **چاپ تک رنگ** | ⭐⭐⭐⭐⭐ | ⭐⭐ |
-| **جذابیت بصری** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
-| **هزینه چاپ** | کم | متوسط تا بالا |
+| **Style** | Minimal, Classic | Complex, Modern |
+| **Brand Feel** | Professional, Serious | Innovative, Technological |
+| **Suitable for** | Traditional B2B | Startups, Tech |
+| **Complexity** | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Small Readability** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
+| **Monochrome Printing** | ⭐⭐⭐⭐⭐ | ⭐⭐ |
+| **Visual Appeal** | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **Printing Cost** | Low | Medium to High |
 
 ---
 
-## 🎯 کدوم رو انتخاب کنیم؟
+## 🎯 Which one to choose?
 
-### انتخاب لوگوی **ساده** اگر:
-✅ مشتریان شما شرکت‌های سنتی هستن  
-✅ می‌خواید خیلی جدی و قابل اعتماد به نظر برسید  
-✅ بودجه چاپ محدود دارید  
-✅ می‌خواید در همه جا (حتی سایزهای خیلی کوچیک) واضح باشه  
+### Choose the **Simple** logo if:
+✅ Your customers are traditional companies  
+✅ You want to appear very serious and reliable  
+✅ You have a limited printing budget  
+✅ You want it to be clear everywhere (even in very small sizes)  
 
-### انتخاب لوگوی **فوتوریستیک** اگر:
-✅ می‌خواید برند مدرن و نوآور به نظر برسید  
-✅ مشتریان شما استارتاپ‌ها و شرکت‌های تکنولوژی هستن  
-✅ بیشتر استفاده دیجیتال دارید (وب، سوشال مدیا)  
-✅ می‌خواید از رقبا متمایز بشید  
-
----
-
-## 💡 پیشنهاد من:
-
-با توجه به اینکه:
-- وب‌سایت شما **خیلی مدرن و پریمیوم** طراحی شده
-- از **گرادیانت‌ها و افکت‌های گلو** استفاده کردید
-- تارگت شما **کسب‌وکارهای مدرن** هستن
-
-**لوگوی فوتوریستیک بهتره!** 🚀
+### Choose the **Futuristic** logo if:
+✅ You want the brand to appear modern and innovative  
+✅ Your customers are startups and technology companies  
+✅ You mostly have digital use (Web, Social Media)  
+✅ You want to stand out from competitors  
 
 ---
 
-## 🔧 نحوه استفاده:
+## 💡 My Suggestion:
 
-### در Header:
+Considering that:
+- Your website design is **very modern and premium**
+- You have used **gradients and glow effects**
+- Your target is **modern businesses**
+
+**The futuristic logo is better!** 🚀
+
+---
+
+## 🔧 How to use:
+
+### In Header:
 ```html
 <a href="index.html" class="logo">
     <img src="logo-futuristic.svg" alt="NordicRoll" height="45">
 </a>
 ```
 
-### در Footer (پس‌زمینه تیره):
+### In Footer (Dark Background):
 ```html
 <a href="index.html" class="logo">
     <img src="logo-futuristic-white.svg" alt="NordicRoll" height="45">
@@ -83,7 +83,7 @@
 
 ---
 
-## 🎨 تنظیمات CSS پیشنهادی:
+## 🎨 Suggested CSS Settings:
 
 ```css
 .logo img {
@@ -98,7 +98,7 @@
     filter: drop-shadow(0 8px 12px rgba(59, 130, 246, 0.2));
 }
 
-/* افکت نورانی اضافی */
+/* Extra glowing effect */
 @keyframes glow {
     0%, 100% { filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.3)); }
     50% { filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.6)); }
@@ -111,46 +111,46 @@
 
 ---
 
-## 📱 نکات مهم:
+## 📱 Important Notes:
 
-### ✅ مزایا:
-- خیلی جذاب و چشم‌گیر
-- با استایل وب‌سایت هماهنگ
-- حس پریمیوم و تکنولوژیک
-- در دیجیتال فوق‌العاده کار می‌کنه
+### ✅ Pros:
+- Very attractive and eye-catching
+- Harmonious with the website style
+- Premium and technological feel
+- Works great in digital
 
-### ⚠️ نکات:
-- برای چاپ تک رنگ مناسب نیست (باید نسخه ساده داشته باشید)
-- در سایزهای خیلی کوچیک (زیر 30px) ممکنه جزئیات گم بشه
-- برای فاکس یا کپی سیاه و سفید، نسخه ساده بهتره
-
----
-
-## 🔄 استفاده ترکیبی (پیشنهاد حرفه‌ای):
-
-**بهترین راه:** از هر دو استفاده کنید!
-
-- **دیجیتال (وب، ایمیل، سوشال):** لوگوی فوتوریستیک
-- **چاپ (فاکتور، کارت ویزیت):** لوگوی ساده
-- **Header وب‌سایت:** فوتوریستیک
-- **Footer:** فوتوریستیک سفید
-- **Favicon:** فوتوریستیک آیکون
-
-این کار باعث میشه:
-✅ در دیجیتال خیلی جذاب باشید
-✅ در چاپ هزینه کمتری داشته باشید
-✅ در همه شرایط واضح و خوانا باشید
+### ⚠️ Notes:
+- Not suitable for monochrome printing (you should have a simple version)
+- Details may be lost in very small sizes (under 30px)
+- For fax or black and white copies, the simple version is better
 
 ---
 
-## 🚀 آماده برای استفاده!
+## 🔄 Hybrid Use (Professional Suggestion):
 
-همه فایل‌ها آماده هستن. فقط کافیه:
-1. فایل مورد نظر رو انتخاب کنید
-2. در کد HTML جایگزین کنید
-3. CSS رو تنظیم کنید
-4. لذت ببرید! 🎉
+**Best way:** Use both!
+
+- **Digital (Web, Email, Social):** Futuristic logo
+- **Print (Invoices, Business Cards):** Simple logo
+- **Website Header:** Futuristic
+- **Footer:** White futuristic
+- **Favicon:** Futuristic icon
+
+This will:
+✅ Make you very attractive in digital
+✅ Lower your printing costs
+✅ Make you clear and readable in all conditions
 
 ---
 
-**موفق باشید! ✨**
+## 🚀 Ready to use!
+
+All files are ready. Just:
+1. Choose the desired file
+2. Replace it in the HTML code
+3. Adjust the CSS
+4. Enjoy! 🎉
+
+---
+
+**Good luck! ✨**

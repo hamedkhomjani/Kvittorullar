@@ -1,118 +1,118 @@
-# 🚀 راهنمای بهینه‌سازی تصاویر
+# 🚀 Image Optimization Guide
 
-## چرا تصاویر باید بهینه بشن؟
+## Why should images be optimized?
 
-تصاویر فعلی شما **1.36 MB** حجم دارن که باعث میشه:
-- ❌ صفحه **4-5 ثانیه** طول بکشه تا لود بشه
-- ❌ مصرف دیتای زیاد برای کاربران موبایل
-- ❌ امتیاز پایین در Google PageSpeed
+Your current images are **1.36 MB** in size, which causes:
+- ❌ Page takes **4-5 seconds** to load
+- ❌ High data consumption for mobile users
+- ❌ Low score in Google PageSpeed
 
-## 📊 تصاویر فعلی:
+## 📊 Current Images:
 
 ```
 receipt_rolls_hero.png      505.38 KB
 pos_roll_standard.png       437.96 KB  
 credit_card_roll.png        416.77 KB
 ─────────────────────────────────────
-مجموع:                    1.36 MB
+Total:                      1.36 MB
 ```
 
-## ✅ راه‌حل: تبدیل به WebP
+## ✅ Solution: Convert to WebP
 
-WebP یه فرمت تصویر مدرنه که:
-- ✅ **70-85% کوچک‌تر** از PNG
-- ✅ کیفیت بصری یکسان
-- ✅ توسط همه مرورگرهای مدرن پشتیبانی میشه
+WebP is a modern image format that:
+- ✅ **70-85% smaller** than PNG
+- ✅ Same visual quality
+- ✅ Supported by all modern browsers
 
-## 🛠️ روش 1: استفاده از ابزار آنلاین (ساده‌ترین)
+## 🛠️ Method 1: Using Online Tools (Simplest)
 
-### گام 1: باز کردن Squoosh
-1. برو به https://squoosh.app
-2. تصویر رو drag & drop کن
+### Step 1: Open Squoosh
+1. Go to https://squoosh.app
+2. Drag & drop the image
 
-### گام 2: تنظیمات
-1. از منوی سمت راست **WebP** رو انتخاب کن
-2. کیفیت رو روی **80** تنظیم کن
-3. دکمه **Download** رو بزن
+### Step 2: Settings
+1. From the right menu, select **WebP**
+2. Set quality to **80**
+3. Click the **Download** button
 
-### گام 3: تکرار برای همه تصاویر
+### Step 3: Repeat for all images
 ```
 receipt_rolls_hero.png  →  receipt_rolls_hero.webp  (~80 KB)
 pos_roll_standard.png   →  pos_roll_standard.webp   (~70 KB)
 credit_card_roll.png    →  credit_card_roll.webp    (~65 KB)
 ```
 
-## 🛠️ روش 2: استفاده از CloudConvert (دسته‌جمعی)
+## 🛠️ Method 2: Using CloudConvert (Batch)
 
-1. برو به https://cloudconvert.com/png-to-webp
-2. همه تصاویر رو یکجا آپلود کن
-3. Quality رو روی **80** تنظیم کن
-4. **Convert** رو بزن
-5. فایل‌های WebP رو دانلود کن
+1. Go to https://cloudconvert.com/png-to-webp
+2. Upload all images at once
+3. Set Quality to **80**
+4. Click **Convert**
+5. Download the WebP files
 
-## 🛠️ روش 3: استفاده از PowerShell (حرفه‌ای)
+## 🛠️ Method 3: Using PowerShell (Professional)
 
-اگه ابزار `cwebp` رو نصب دارید:
+If you have the `cwebp` tool installed:
 
 ```powershell
-# تبدیل همه PNG ها به WebP
+# Convert all PNGs to WebP
 Get-ChildItem *.png | ForEach-Object {
     $output = $_.BaseName + ".webp"
     cwebp -q 80 $_.FullName -o $output
 }
 ```
 
-## 📝 بعد از تبدیل: به‌روزرسانی HTML
+## 📝 After Conversion: Updating HTML
 
-### فایل‌های نیاز به تغییر:
+### Files needing changes:
 
 #### 1. index.html
 ```html
-<!-- قبل -->
+<!-- Before -->
 <img src="receipt_rolls_hero.png" alt="...">
 
-<!-- بعد -->
+<!-- After -->
 <picture>
     <source srcset="receipt_rolls_hero.webp" type="image/webp">
     <img src="receipt_rolls_hero.png" loading="lazy" alt="...">
 </picture>
 ```
 
-#### 2. سایر صفحات (bulk.html, subscription.html, etc.)
-همین تغییرات رو برای تمام تصاویر اعمال کنید.
+#### 2. Other pages (bulk.html, subscription.html, etc.)
+Apply the same changes for all images.
 
-## 📈 نتیجه بعد از بهینه‌سازی:
+## 📈 Results After Optimization:
 
-| معیار | قبل | بعد | بهبود |
+| Metric | Before | After | Improvement |
 |-------|-----|-----|-------|
-| **حجم تصاویر** | 1.36 MB | ~215 KB | **-84%** 🎉 |
-| **زمان بارگذاری** | 4.5s | 1.2s | **-73%** ⚡ |
-| **مصرف دیتا** | بالا | کم | **-85%** 📱 |
+| **Image Size** | 1.36 MB | ~215 KB | **-84%** 🎉 |
+| **Load Time** | 4.5s | 1.2s | **-73%** ⚡ |
+| **Data Usage** | High | Low | **-85%** 📱 |
 
 ## ✅ Checklist
 
-- [ ] تبدیل `receipt_rolls_hero.png` به WebP
-- [ ] تبدیل `pos_roll_standard.png` به WebP
-- [ ] تبدیل `credit_card_roll.png` به WebP
-- [ ] به‌روزرسانی `index.html`
-- [ ] به‌روزرسانی `bulk.html`
-- [ ] به‌روزرسانی `subscription.html`
-- [ ] تست در مرورگر
-- [ ] حذف فایل‌های PNG قدیمی (اختیاری)
+- [ ] Convert `receipt_rolls_hero.png` to WebP
+- [ ] Convert `pos_roll_standard.png` to WebP
+- [ ] Convert `credit_card_roll.png` to WebP
+- [ ] Update `index.html`
+- [ ] Update `bulk.html`
+- [ ] Update `subscription.html`
+- [ ] Test in browser
+- [ ] Delete old PNG files (Optional)
 
-## 💡 نکات مهم:
+## 💡 Important Notes:
 
-1. **Fallback**: همیشه PNG قدیمی رو نگه دارید برای مرورگرهای قدیمی
-2. **Quality**: کیفیت 80 بهترین تعادل بین حجم و کیفیته
-3. **Testing**: حتماً تست کنید که تصاویر درست نمایش داده میشن
-4. **Backup**: قبل از حذف PNG ها، یه backup بگیرید
+1. **Fallback**: Always keep the old PNG for older browsers
+2. **Quality**: 80 quality is the best balance between size and quality
+3. **Testing**: Make sure to test that images display correctly
+4. **Backup**: Take a backup before deleting PNGs
 
-## 🚀 شروع کنید!
+## 🚀 Get Started!
 
-1. برید به https://squoosh.app
-2. اولین تصویر رو آپلود کنید
-3. WebP رو انتخاب کنید
-4. دانلود کنید
-5. تکرار کنید! 🎯
+1. Go to https://squoosh.app
+2. Upload the first image
+3. Select WebP
+4. Download
+5. Repeat! 🎯
 
-**موفق باشید! ✨**
+**Good luck! ✨**

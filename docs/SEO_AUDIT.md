@@ -1,40 +1,40 @@
-# گزارش آنالیز سئو (SEO Audit Report) - NordicRoll
+# SEO Audit Report - NordicRoll
 
-## 1. بررسی کلی (Overview)
-وب‌سایت شما از نظر فنی برای سئو در وضعیت **بسیار خوبی** قرار دارد. ساختار HTML استاندارد است، متاتگ‌ها به درستی تنظیم شده‌اند و نکات مهمی مانند سرعت و موبایل-فرندلی بودن رعایت شده است.
+## 1. Overview
+Technically, your website is in **very good status** for SEO. The HTML structure is standard, meta tags are set correctly, and important points like speed and mobile-friendliness are respected.
 
-## 2. نقاط قوت (✅ Strengths)
+## 2. Strengths (✅ Strengths)
 
-### الف) متاتگ‌ها و عناوین (Meta Tags & Titles)
-*   **Title Tags**: تمام صفحات (`index`, `about`, `bulk`, `subscription`) دارای تایتل‌های منحصر‌به‌فرد و توصیفی هستند.
-    *   مثال: `<title>NordicRoll - Premium Receipt Rolls</title>`
-*   **Meta Descriptions**: توضیحات متا (Description) برای همه صفحات وجود دارد و جذاب نوشته شده است که نرخ کلیک (CTR) را افزایش می‌دهد.
-*   **Canonical Tags**: تگ کانونیکال به درستی در همه صفحات وجود دارد که از ایجاد محتوای تکراری (Duplicate Content) جلوگیری می‌کند.
-*   **Hreflang Tags**: تگ‌های مربوط به زبان (`en`, `sv`) به درستی پیاده‌سازی شده‌اند که برای سئوی بین‌المللی عالی است.
+### A) Meta Tags & Titles
+*   **Title Tags**: All pages (`index`, `about`, `bulk`, `subscription`) have unique and descriptive titles.
+    *   Example: `<title>NordicRoll - Premium Receipt Rolls</title>`
+*   **Meta Descriptions**: Meta descriptions exist for all pages and are engagingly written, which increases Click-Through Rate (CTR).
+*   **Canonical Tags**: Canonical tags are correctly present on all pages, preventing Duplicate Content.
+*   **Hreflang Tags**: Language-related tags (`en`, `sv`) are correctly implemented, which is great for international SEO.
 
-### ب) ساختار محتوا (Content Structure)
-*   **H1 Tags**: هر صفحه دقیقاً یک تگ `<h1>` دارد که موضوع اصلی صفحه را بیان می‌کند. این یکی از اصول مهم سئو است.
-*   **Heading Hierarchy**: ترتیب تگ‌های `<h2>` و `<h3>` منطقی است و به درک ساختار صفحه توسط گوگل کمک می‌کند.
-*   **Alt Text**: تصاویر دارای متن جایگزین (Alt) هستند (مثلاً `alt="NordicRoll Premium Receipt Rolls"`).
+### B) Content Structure
+*   **H1 Tags**: Each page has exactly one `<h1>` tag stating the main topic of the page. This is one of the important principles of SEO.
+*   **Heading Hierarchy**: The order of `<h2>` and `<h3>` tags is logical and helps Google understand the page structure.
+*   **Alt Text**: Images have alternative text (Alt) (e.g., `alt="NordicRoll Premium Receipt Rolls"`).
 
-### ج) فنی و تکنیکال (Technical SEO)
-*   **Sitemap.xml**: نقشه سایت وجود دارد و همه صفحات مهم را لیست کرده است.
-*   **Robots.txt**: دسترسی ربات‌های گوگل باز است و به نقشه سایت لینک داده شده است.
-*   **JSON-LD (Structured Data)**: در صفحه اصلی از اسکیماهای `Organization` و `Product` استفاده شده است که شانس نمایش ستاره و قیمت در نتایج گوگل را افزایش می‌دهد.
+### C) Technical SEO
+*   **Sitemap.xml**: A sitemap exists and lists all important pages.
+*   **Robots.txt**: Google bot access is open and linked to the sitemap.
+*   **JSON-LD (Structured Data)**: `Organization` and `Product` schemas are used on the home page, increasing the chance of displaying stars and prices in Google results.
 
-## 3. پیشنهادات بهبود (💡 Improvements)
+## 3. Improvements (💡 Improvements)
 
-اگرچه سایت وضعیت خوبی دارد، اما انجام موارد زیر می‌تواند رتبه شما را باز هم بهتر کند:
+Although the site is in good condition, the following can further improve your ranking:
 
-### ۱. اسکیما (Structured Data) برای همه صفحات
-*   در حال حاضر فقط صفحه اصلی اسکیمای کامل دارد.
-*   **پیشنهاد**: برای صفحه `about.html` از اسکیمای `AboutPage` و برای صفحه `contact` (یا مودال تماس) از اسکیمای `ContactPoint` استفاده کنید.
+### 1. Schema (Structured Data) for all pages
+*   Currently, only the home page has complete schema.
+*   **Recommendation**: Use `AboutPage` schema for `about.html` and `ContactPoint` schema for the contact page (or contact modal).
 
-### ۲. سرعت و پرفورمنس (Performance)
-*   **Lazy Loading**: برای تصاویر پایین صفحه (مثل بخش نظرات یا فوتر) می‌توانید از ویژگی `loading="lazy"` استفاده کنید تا سرعت لود اولیه بیشتر شود. (در حال حاضر روی برخی تصاویر محصول وجود دارد، مطمئن شوید روی همه تصاویر غیرضروری اعمال شده است).
+### 2. Performance
+*   **Lazy Loading**: For images at the bottom of the page (like reviews or footer), you can use the `loading="lazy"` attribute to increase initial load speed. (It's already on some product images; ensure it's applied to all non-essential images).
 
-### ۳. لینک‌سازی داخلی (Internal Linking)
-*   مطمئن شوید که از داخل پست‌های وبلاگ (اگر در آینده اضافه کردید) یا بخش‌های مختلف، به صفحات محصول (Product Pages) با کلمات کلیدی مرتبط لینک داده‌اید.
+### 3. Internal Linking
+*   Ensure that you link to Product Pages with relevant keywords from within blog posts (if added in the future) or different sections.
 
-## 4. نتیجه‌گیری
-سایت شما از نظر سئوی داخلی (On-Page SEO) و فنی (Technical SEO) نمره **۹ از ۱۰** را می‌گیرد. زیرساخت لازم برای رتبه گرفتن در گوگل کاملاً فراهم است. تمرکز بعدی شما باید روی **محتوا** (وبلاگ، مقالات آموزشی درباره رول‌های حرارتی) و **اینسایت‌های خارجی** (Backlinks) باشد.
+## 4. Conclusion
+Your site earns a score of **9 out of 10** for On-Page SEO and Technical SEO. The necessary infrastructure for ranking on Google is fully provided. Your next focus should be on **content** (blog, educational articles about thermal rolls) and **external insights** (Backlinks).
