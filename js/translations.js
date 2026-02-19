@@ -237,7 +237,17 @@ const translations = {
         contact_success_desc: "We have received your message and will contact you soon.",
         pay_invoice: "Invoice",
         pay_card: "Card",
-        pay_swish: "Swish"
+        pay_swish: "Swish",
+        a11y_title: "Accessibility Settings",
+        a11y_text_size: "Text Size",
+        a11y_visual_modes: "Visual Modes",
+        a11y_font_normal: "Normal",
+        a11y_font_large: "Large",
+        a11y_font_xl: "Extra Large",
+        a11y_contrast: "High Contrast",
+        a11y_greyscale: "Greyscale",
+        a11y_tools: "Tools",
+        a11y_reset: "Reset All Settings"
     },
     sv: {
         nav_products: "Produkter",
@@ -480,7 +490,17 @@ const translations = {
         contact_success_desc: "Vi har tagit emot ditt meddelande och kontaktar dig snart.",
         pay_invoice: "Faktura",
         pay_card: "Kort",
-        pay_swish: "Swish"
+        pay_swish: "Swish",
+        a11y_title: "Tillgänglighet",
+        a11y_text_size: "Textstorlek",
+        a11y_visual_modes: "Visuella lägen",
+        a11y_font_normal: "Normal",
+        a11y_font_large: "Stor",
+        a11y_font_xl: "Extra stor",
+        a11y_contrast: "Hög kontrast",
+        a11y_greyscale: "Gråskala",
+        a11y_tools: "Verktyg",
+        a11y_reset: "Återställ allt"
     },
     fa: {
         nav_products: "محصولات",
@@ -724,7 +744,17 @@ const translations = {
         contact_success_desc: "پیام شما دریافت شد. به زودی با شما تماس خواهیم گرفت.",
         pay_invoice: "فاکتور",
         pay_card: "کارت بانکی",
-        pay_swish: "سویش"
+        pay_swish: "سویش",
+        a11y_title: "تنظیمات دسترسی‌پذیری",
+        a11y_text_size: "اندازه متن",
+        a11y_visual_modes: "حالت‌های بصری",
+        a11y_font_normal: "عادی",
+        a11y_font_large: "بزرگ",
+        a11y_font_xl: "خیلی بزرگ",
+        a11y_contrast: "کنتراست بالا",
+        a11y_greyscale: "سیاه و سفید",
+        a11y_tools: "ابزارها",
+        a11y_reset: "تنظیم مجدد همه"
     },
     de: {
         nav_products: "Produkte",

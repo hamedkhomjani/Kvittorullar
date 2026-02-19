@@ -1,0 +1,183 @@
+/* Accessibility Widget Styles */
+:root {
+    --a11y-primary: #2563eb;
+    --a11y-bg: rgba(255, 255, 255, 0.9);
+    --a11y-text: #1f2937;
+    --a11y-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+/* Floating Action Button */
+.a11y-trigger {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--a11y-primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--a11y-shadow);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.a11y-trigger:hover {
+    transform: scale(1.1);
+    background: #1d4ed8;
+}
+
+.a11y-trigger svg {
+    width: 30px;
+    height: 30px;
+}
+
+/* Accessibility Menu */
+.a11y-menu {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    width: 300px;
+    background: var(--a11y-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--a11y-shadow);
+    z-index: 9998;
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    animation: slideInUp 0.3s ease-out;
+}
+
+.a11y-menu.active {
+    display: flex;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.a11y-menu h2 {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    color: var(--a11y-text);
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.a11y-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #6b7280;
+}
+
+/* Control Groups */
+.a11y-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.a11y-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #4b5563;
+}
+
+.a11y-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.a11y-btn {
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.a11y-btn:hover {
+    background: #f3f4f6;
+    border-color: var(--a11y-primary);
+}
+
+.a11y-btn.active {
+    background: var(--a11y-primary);
+    color: white;
+    border-color: var(--a11y-primary);
+}
+
+/* Global Changes */
+html.a11y-high-contrast {
+    background: #000 !important;
+    color: #ffff00 !important;
+}
+
+html.a11y-high-contrast * {
+    background-color: #000 !important;
+    color: #ffff00 !important;
+    border-color: #ffff00 !important;
+    box-shadow: none !important;
+}
+
+html.a11y-high-contrast .btn,
+html.a11y-high-contrast button {
+    background: #ffff00 !important;
+    color: #000 !important;
+    border: 2px solid #ffff00 !important;
+}
+
+/* Fix for high contrast trigger visibility */
+html.a11y-high-contrast .a11y-trigger {
+    background: #ffff00 !important;
+    color: #000 !important;
+    border: 3px solid #000 !important;
+}
+
+html.a11y-greyscale {
+    filter: grayscale(100%);
+}
+
+/* Font Resizing Classes */
+html.font-xl {
+    font-size: 1.25rem !important;
+}
+
+html.font-xxl {
+    font-size: 1.5rem !important;
+}
+
+/* Focus Indicators for Keyboard Nav */
+html.user-is-tabbing *:focus {
+    outline: 3px solid #ffff00 !important;
+    outline-offset: 4px !important;
+    box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.4) !important;
+}
